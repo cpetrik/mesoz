@@ -1,0 +1,31 @@
+netcdf zmeso200_Omon_CanESM5-CanOE_historical_r1i1p2f1_gn_1951-2014 {
+dimensions:
+	lon = 360 ;
+	lat = 291 ;
+	time = 768 ;
+variables:
+	double lat(lat, lon) ;
+		lat:long_name = "latitude" ;
+		lat:standard_name = "lat" ;
+		lat:units = "degrees_north" ;
+		lat:axis = "Y" ;
+	double lon(lat, lon) ;
+		lon:long_name = "longitude" ;
+		lon:standard_name = "lon" ;
+		lon:units = "degrees_east" ;
+		lon:axis = "X" ;
+	double time(time) ;
+		time:long_name = "time" ;
+		time:standard_name = "time" ;
+		time:units = "year" ;
+		time:calendar = "365_day" ;
+		time:axis = "T" ;
+	double zmeso200(time, lat, lon) ;
+		zmeso200:long_name = "mesozooplankton biomass integrated over top 200 m" ;
+		zmeso200:units = "molC m-2" ;
+		zmeso200:_FillValue = 1.e+20 ;
+
+// global attributes:
+		:creation_date = "02-Dec-2020 17:58:29" ;
+		:_FillValue = 1.e+20 ;
+}
