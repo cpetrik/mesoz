@@ -411,6 +411,40 @@ names(Cff3) <- c("Intercept","Lchl")
 row.names(Cff3) <- c("CAN","CMCC","CNRM","GFDL","IPSL","UKESM","obs")
 write.table(Cff3,"Hist_coeffs_mod_chl_biome3_HCPS_obsglm.csv",sep=",",row.names=T)
 
+## Save standard error of obsGLMM
+se <- as.data.frame(t(sqrt(diag(vcov(Olm0)))))
+se[2,] <- sqrt(diag(vcov(Olm1)))
+se[3,] <- sqrt(diag(vcov(Olm2)))
+se[4,] <- sqrt(diag(vcov(Olm3)))
+names(se) <- c("Intercept","Lchl")
+row.names(se) <- c("Global","LC","HCSS","HCPS")
+write.table(se,"Hist_std_err_biomes_obsglm.csv",sep=",",row.names=T)
 
+## prediction tests
+cmin <- log10(0.01)
+cmax <- log10(25)
+pchl <- exp(log(10)*seq(cmin,cmax,length=50))
 
+plm0 <- predict(Olm0, newdata = data.frame(Lchl = log10(pchl)),
+        interval = "confidence")
+plm1 <- predict(Olm1, newdata = data.frame(Lchl = log10(pchl)),
+                interval = "confidence")
+plm2 <- predict(Olm2, newdata = data.frame(Lchl = log10(pchl)),
+                interval = "confidence")
+plm3 <- predict(Olm3, newdata = data.frame(Lchl = log10(pchl)),
+                interval = "confidence")
+
+CI0 <- as.data.frame(plm0)
+CI1 <- as.data.frame(plm1)
+CI2 <- as.data.frame(plm2)
+CI3 <- as.data.frame(plm3)
+CI0$Lchl <- log10(pchl)
+CI1$Lchl <- log10(pchl)
+CI2$Lchl <- log10(pchl)
+CI3$Lchl <- log10(pchl)
+
+write.table(CI0,"Hist_CIs_chl_global_obsglm.csv",sep=",",row.names=F)
+write.table(CI1,"Hist_CIs_chl_biome1_LC_obsglm.csv",sep=",",row.names=F)
+write.table(CI2,"Hist_CIs_chl_biome2_HCSS_obsglm.csv",sep=",",row.names=F)
+write.table(CI3,"Hist_CIs_chl_biome3_HCPS_obsglm.csv",sep=",",row.names=F)
 

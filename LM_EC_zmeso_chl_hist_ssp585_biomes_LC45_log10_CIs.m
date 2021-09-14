@@ -9,6 +9,7 @@ figp ='/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_fig
 
 load('Hist_SSP585_coeffs_log10_chl_global_biomes.mat');
 load('Hist_CIs_biomes_obsglm.mat');
+load('Hist_std_err_biomes_obsglm.mat');
 
 %%
 Hist.slop = [HistB1,HistB2,HistB3,HistBG];
@@ -43,30 +44,14 @@ hzoo3CI =[CI3(:,3); flipud(CI3(:,2))];
 hzoo4CI =[CIG(:,3); flipud(CIG(:,2))]; 
 
 %% color same as Taylor diagrams
-% cm=[0 0.7 0;...   %g
-%     0 0 0.75;...  %b
-%     0.5 0 1;...   %purple
-%     1 0 0;...     %r
-%     0.5 0 0;...   %maroon
-%     0.35 0.35 0.35]; %grey
-
-% cb=[34/255 136/255 51/255;...   %green
-%     %238/255 119/255 51/255;...  %orange
-%     %0/255 153/255 136/255;...   %teal
-%     153/255 153/255 51/255;...   %olive
-%     51/255 187/255 238/255;...  %cyan
-%     0/255 68/255 136/255;...    %blue
-%     238/255 102/255 119/255;... %red
-%     170/255 51/255 119/255;...  %purple
-%     0 0 0];                     %black
-
 cb=[34/255 136/255 51/255;...   %green
     153/255 153/255 51/255;...  %olive
     51/255 187/255 238/255;...  %cyan
     0/255 68/255 136/255;...    %blue
     238/255 102/255 119/255;... %red
     170/255 51/255 119/255;...  %purple
-    0.333 0.333 0.333];         %grey
+    0 0 0];         %black
+%     0.333 0.333 0.333];         %grey
 
 set(groot,'defaultAxesColorOrder',cb);
 
@@ -110,16 +95,28 @@ y2 = Hist.slop(7,2)*ones(size(xs));
 y3 = Hist.slop(7,3)*ones(size(xs));
 y4 = Hist.slop(7,4)*ones(size(xs));
 
+l1 = Hist.slop(7,1)*ones(size(xs)) - 2*Lchl(1);
+l2 = Hist.slop(7,2)*ones(size(xs)) - 2*Lchl(2);
+l3 = Hist.slop(7,3)*ones(size(xs)) - 2*Lchl(3);
+l4 = Hist.slop(7,4)*ones(size(xs)) - 2*Lchl(4);
+
+u1 = Hist.slop(7,1)*ones(size(xs)) + 2*Lchl(1);
+u2 = Hist.slop(7,2)*ones(size(xs)) + 2*Lchl(2);
+u3 = Hist.slop(7,3)*ones(size(xs)) + 2*Lchl(3);
+u4 = Hist.slop(7,4)*ones(size(xs)) + 2*Lchl(4);
+
 %% 3 biomes + global
 f1 = figure('Units','inches','Position',[1 1 9 8]);
 subplot(4,4,1)
-plot(log10(chl),hzoo4,'LineWidth',2)
+plot(log10(chl),hzoo4,'LineWidth',2); hold on;
 ylim([-6 3])
 xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
 title('Hist')
 lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM'}); 
 lg.Position(1:2) = [.725 .45];
+lg.AutoUpdate = 'off';
+fill(X,hzoo4CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25) %plot filled area
 
 subplot(4,4,2)
 plot(log10(chl),szoo4,'LineWidth',2)
@@ -128,17 +125,20 @@ xlim([round(cmin) round(cmax)])
 title('SSP 585')
 
 subplot(4,4,3)
+plot(x,x,'--k'); hold on;
 for i=1:6
     plot(Hist.slop(i,4),SSP.slop(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(x,x,':k'); hold on;
-plot(y4,xs,'color',cb(7,:)); hold on;
+plot(y4,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l4,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u4,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(1:6,4),ypred4,'k'); hold on;
 axis([0.2 2 0.2 2])
 title('Future chl sensitivity')
 
 subplot(4,4,5)
-plot(log10(chl),hzoo1,'LineWidth',2)
+plot(log10(chl),hzoo1,'LineWidth',2); hold on;
+fill(X,hzoo1CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-6 5])
 xlim([round(cmin) round(cmax)])
 % xlabel('log10 chl (mg m^-^3)')
@@ -154,18 +154,21 @@ xlim([round(cmin) round(cmax)])
 %title('SSP 585')
 
 subplot(4,4,7)
+plot(x,x,'--k'); hold on;
 for i=1:6
     plot(Hist.slop(i,1),SSP.slop(i,1),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(x,x,':k'); hold on;
-plot(y1,xs,'color',cb(7,:)); hold on;
+plot(y1,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l1,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u1,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(1:6,1),ypred1,'k'); hold on;
 % legend(smod)
 % legend('location','southeast')
 axis([0 2.5 0 2.5])
 
 subplot(4,4,9)
-plot(log10(chl),hzoo2,'LineWidth',2)
+plot(log10(chl),hzoo2,'LineWidth',2); hold on;
+fill(X,hzoo2CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 xlim([round(cmin) round(cmax)])
 ylim([-10 7])
 % xlabel('log_1_0 chl (mg m^-^3)')
@@ -178,11 +181,13 @@ xlim([round(cmin) round(cmax)])
 ylim([-10 7])
 
 subplot(4,4,11)
-plot(x,x,':k'); hold on;
+plot(x,x,'--k'); hold on;
 for i=1:6
     plot(Hist.slop(i,2),SSP.slop(i,2),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(y2,xs,'color',cb(7,:)); hold on;
+plot(y2,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l2,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u2,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(1:6,2),ypred2,'k'); hold on;
 axis([0 4 0 6])
 % xlabel('Historic chl sensitivity')
@@ -190,7 +195,8 @@ axis([0 4 0 6])
 %title('HCSS')
 
 subplot(4,4,13)
-plot(log10(chl),hzoo3,'LineWidth',2)
+plot(log10(chl),hzoo3,'LineWidth',2); hold on;
+fill(X,hzoo1CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-10 5])
 xlim([round(cmin) round(cmax)])
 xlabel('log_1_0 chl (mg m^-^3)')
@@ -205,18 +211,20 @@ xlabel('log_1_0 chl (mg m^-^3)')
 %title('SSP 585')
 
 subplot(4,4,15)
-plot(x,x,':k'); hold on;
+plot(x,x,'--k'); hold on;
 for i=1:6
     plot(Hist.slop(i,3),SSP.slop(i,3),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(y3,xs,'color',cb(7,:)); hold on;
+plot(y3,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l3,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u3,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(1:6,3),ypred3,'k'); hold on;
 axis([-0.5 3 0 5])
 xlabel('Historic chl sensitivity')
 %ylabel('Future chl sensitivity')
 %title('HCPS')
 
-print('-dpng',[figp 'Hist_SSP585_lm_EC_zmeso_chl_global_biomes_LC45_cmcc.png'])
+print('-dpng',[figp 'Hist_SSP585_lm_EC_zmeso_chl_global_biomes_LC45_CIs.png'])
 
 %% No CAN + global
 f4 = figure('Units','inches','Position',[1 1 9 8]);
@@ -227,6 +235,8 @@ end
 ylim([-2 2])
 lg  = legend({'CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM'}); 
 lg.Position(1:2) = [.71 .45];
+lg.AutoUpdate = 'off';
+fill(X,hzoo4CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 xlim([round(cmin) round(cmax)])
 title('Hist')
 ylabel({'Global','log_1_0 zmeso'})
@@ -240,27 +250,25 @@ xlim([round(cmin) round(cmax)])
 title('SSP 585')
 
 subplot(4,4,3)
+plot(x,x,'--k'); hold on;
 for i=2:6
     plot(Hist.slop(i,4),SSP.slop(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(x,x,':k'); hold on;
-plot(y4,xs,'color',cb(7,:)); hold on;
+plot(y4,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l4,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u4,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(2:6,4),noCypred4,'k'); hold on;
-% legend(smod)
-% legend('location','southeast')
 axis([0.25 1.25 0.25 1.5])
 title('Future chl sensitivity')
 
-
+%LC
 subplot(4,4,5)
 for i=2:7
     plot(log10(chl),hzoo1(i,:),'color',cb(i,:),'LineWidth',2); hold on;
 end
-% legend(hmod)
-% legend('location','northwest')
+fill(X,hzoo1CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-3 4])
 xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
 ylabel({'LC','log_1_0 zmeso'})
 text(-8.5,-30,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
 
@@ -270,29 +278,26 @@ for i=2:6
 end
 ylim([-3 4])
 xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
-% ylabel('log_1_0 zmeso (mgC m^-^2)')
-%title('SSP 585')
 
 subplot(4,4,7)
+plot(x,x,'--k'); hold on;
 for i=2:6
     plot(Hist.slop(i,1),SSP.slop(i,1),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(x,x,':k'); hold on;
-plot(y1,xs,'color',cb(7,:)); hold on;
+plot(y1,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l1,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u1,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(2:6,1),noCypred1,'k'); hold on;
-% legend(smod)
-% legend('location','southeast')
 axis([0 2.5 0 2.5])
-% xlabel('Historic chl sensitivity')
 
+%HCSS
 subplot(4,4,9)
 for i=2:7
     plot(log10(chl),hzoo2(i,:),'color',cb(i,:),'LineWidth',2); hold on;
 end
+fill(X,hzoo2CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-4 3])
 xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
 ylabel({'HCSS','log_1_0 zmeso'})
 
 subplot(4,4,10)
@@ -301,24 +306,24 @@ for i=2:6
 end
 ylim([-4 3])
 xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
-%title('SSP 585')
 
 subplot(4,4,11)
-plot(x,x,':k'); hold on;
+plot(x,x,'--k'); hold on;
 for i=2:6
     plot(Hist.slop(i,2),SSP.slop(i,2),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(y2,xs,'color',cb(7,:)); hold on;
+plot(y2,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l2,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u2,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(2:6,2),noCypred2,'k'); hold on;
 axis([-0.2 2 -0.2 1.4])
-% xlabel('Historic chl sensitivity')
-%title('HCSS')
 
+%HCPS
 subplot(4,4,13)
 for i=2:7
     plot(log10(chl),hzoo3(i,:),'color',cb(i,:),'LineWidth',2); hold on;
 end
+fill(X,hzoo3CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-1.5 1])
 xlim([round(cmin) round(cmax)])
 xlabel('log_1_0 chl (mg m^-^3)')
@@ -331,141 +336,18 @@ end
 ylim([-1.5 1])
 xlim([round(cmin) round(cmax)])
 xlabel('log_1_0 chl (mg m^-^3)')
-%title('SSP 585')
 
 subplot(4,4,15)
-plot(x,x,':k'); hold on;
+plot(x,x,'--k'); hold on;
 for i=2:6
     plot(Hist.slop(i,3),SSP.slop(i,3),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(y3,xs,'color',cb(7,:)); hold on;
+plot(y3,xs,'color',[0.35 0.35 0.35]); hold on;
+plot(l3,xs,':','color',[0.35 0.35 0.35]); hold on;
+plot(u3,xs,':','color',[0.35 0.35 0.35]); hold on;
 plot(Hist.slop(2:6,3),noCypred3,'k'); hold on;
 axis([-0.5 0.75 0 0.75])
 xlabel('Historic chl sensitivity')
+print('-dpng',[figp 'Hist_SSP585_lm_EC_zmeso_chl_global_biomes_LC45_CIs_noCAN.png'])
 
-
-print('-dpng',[figp 'Hist_SSP585_lm_EC_zmeso_chl_global_biomes_LC45_cmcc_noCAN.png'])
-
-%% No CAN no UK + global
-figure(7)
-subplot(4,3,1)
-for i=2:5
-    plot(log10(chl),hzoo4(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-plot(log10(chl),hzoo4(6,:),'color',cb(7,:),'LineWidth',2); hold on;
-% legend(hmod)
-% legend('location','northwest')
-ylim([-3 2])
-xlim([round(cmin) round(cmax)])
-title('Hist')
-ylabel('Global')
-
-subplot(4,3,2)
-for i=2:5
-    plot(log10(chl),szoo4(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-ylim([-3 2])
-xlim([round(cmin) round(cmax)])
-title('SSP 585')
-
-subplot(4,3,3)
-for i=2:5
-    plot(Hist.slop(i,4),SSP.slop(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
-end
-plot(x,x,':k'); hold on;
-plot(y4,xs,'color',cb(7,:)); hold on;
-axis([0.3 1.3 0.3 1.3])
-title('Future chl sensitivity')
-
-subplot(4,3,4)
-for i=2:5
-    plot(log10(chl),hzoo1(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-plot(log10(chl),hzoo1(6,:),'color',cb(7,:),'LineWidth',2); hold on;
-% legend(hmod)
-% legend('location','northwest')
-ylim([-10 6])
-xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
-ylabel('LC')
-text(-8.5,-15,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
-
-subplot(4,3,5)
-for i=2:5
-    plot(log10(chl),szoo1(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-ylim([-10 6])
-xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
-% ylabel('log_1_0 zmeso (mgC m^-^2)')
-%title('SSP 585')
-
-subplot(4,3,6)
-for i=2:5
-    plot(Hist.slop(i,1),SSP.slop(i,1),'.','color',cb(i,:),'MarkerSize',20); hold on;
-end
-plot(x,x,':k'); hold on;
-plot(y1,xs,'color',cb(7,:)); hold on;
-axis([1 5 1 5])
-% xlabel('Historic chl sensitivity')
-
-subplot(4,3,7)
-for i=2:5
-    plot(log10(chl),hzoo2(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-plot(log10(chl),hzoo2(6,:),'color',cb(7,:),'LineWidth',2); hold on;
-ylim([-6 3])
-xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
-ylabel('HCSS')
-%title('Hist')
-
-subplot(4,3,8)
-for i=2:5
-    plot(log10(chl),szoo2(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-ylim([-6 3])
-xlim([round(cmin) round(cmax)])
-% xlabel('log_1_0 chl (mg m^-^3)')
-%title('SSP 585')
-
-subplot(4,3,9)
-plot(x,x,':k'); hold on;
-for i=2:5
-    plot(Hist.slop(i,2),SSP.slop(i,2),'.','color',cb(i,:),'MarkerSize',20); hold on;
-end
-plot(y2,xs,'color',cb(7,:)); hold on;
-axis([-0.25 1.5 -0.25 1.5])
-% xlabel('Historic chl sensitivity')
-%title('HCSS')
-
-subplot(4,3,10)
-for i=2:5
-    plot(log10(chl),hzoo3(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-plot(log10(chl),hzoo3(6,:),'color',cb(7,:),'LineWidth',2); hold on;
-ylim([-2 1])
-xlim([round(cmin) round(cmax)])
-xlabel('log_1_0 chl (mg m^-^3)')
-ylabel('HCPS')
-
-subplot(4,3,11)
-for i=2:5
-    plot(log10(chl),szoo3(i,:),'color',cb(i,:),'LineWidth',2); hold on;
-end
-ylim([-2 1])
-xlim([round(cmin) round(cmax)])
-xlabel('log_1_0 chl (mg m^-^3)')
-%title('SSP 585')
-
-subplot(4,3,12)
-plot(x,x,':k'); hold on;
-for i=2:5
-    plot(Hist.slop(i,3),SSP.slop(i,3),'.','color',cb(i,:),'MarkerSize',20); hold on;
-end
-plot(y3,xs,'color',cb(7,:)); hold on;
-axis([-0.2 0.8 0 0.8])
-xlabel('Historic chl sensitivity')
-
-print('-dpng',[figp 'Hist_SSP585_lm_EC_zmeso_chl_global_biomes_LC45_cmcc_noCANnoUK.png'])
 
