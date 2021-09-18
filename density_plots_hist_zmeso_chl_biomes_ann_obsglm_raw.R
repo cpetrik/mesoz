@@ -142,6 +142,11 @@ c3 <- ggplot(subset(CM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
   ylab("") + xlab("") + ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+c0 <- ggplot(CM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
+  ylab("") + xlab("") + ggtitle("Global") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 
 m1 <- ggplot(subset(MM,biome==1), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
@@ -158,6 +163,11 @@ m3 <- ggplot(subset(MM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
   ylab("") + xlab("") + ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+m0 <- ggplot(MM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 500) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
+  ylab("") + xlab("") + ggtitle("Global") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 
 n1 <- ggplot(subset(NM,biome==1), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
@@ -170,6 +180,11 @@ n2 <- ggplot(subset(NM,biome==2), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   ylab("") + xlab("") + #ggtitle("HCSS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 n3 <- ggplot(subset(NM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
+  ylab("") + xlab("") + #ggtitle("HCPS") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+n0 <- ggplot(NM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
   ylab("") + xlab("") + #ggtitle("HCPS") +
@@ -190,6 +205,11 @@ g3 <- ggplot(subset(GM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
   ylab("") + xlab("") + #ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+g0 <- ggplot(GM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
+  ylab("") + xlab("") + #ggtitle("HCPS") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 
 i1 <- ggplot(subset(IM,biome==1), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
@@ -202,6 +222,11 @@ i2 <- ggplot(subset(IM,biome==2), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   ylab("") + xlab("") + #ggtitle("HCSS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 i3 <- ggplot(subset(IM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
+  ylab("") + xlab("") + #ggtitle("HCPS") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+i0 <- ggplot(IM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
   ylab("") + xlab("") + #ggtitle("HCPS") +
@@ -222,6 +247,11 @@ u3 <- ggplot(subset(UM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
   ylab("") + xlab("") + #ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+u0 <- ggplot(UM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
+  ylab("") + xlab("") + #ggtitle("HCPS") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 
 o1 <- ggplot(subset(OG,biome==1), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
@@ -234,6 +264,11 @@ o2 <- ggplot(subset(OG,biome==2), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) 
   ylab("") + xlab("chl") + #ggtitle("HCSS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 o3 <- ggplot(subset(OG,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
+  geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
+  ylab("") + xlab("chl") + #ggtitle("HCPS") +
+  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+o0 <- ggplot(OG, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
   ylab("") + xlab("chl") + #ggtitle("HCPS") +
@@ -292,6 +327,38 @@ plot5 <- plot_grid(m1, NULL, m2, rel_heights = c(1, -0.1, 1), align = "hv",
                    labels = c("A", "B"), ncol = 1)
 plot5
 
+## With Global
+png(paste0(figp,'scatter_hist_mesoz_chl_biomes_global_all_log_obsglm_LC45_v2.png'), 
+    width = 8*300,        # 5 x 300 pixels
+    height = 10*300,
+    res = 300,            # 300 pixels per inch
+    pointsize = 8)
+plot_grid( m1,m2,m3,m0,
+           NULL,NULL,NULL,NULL,
+           n1,n2,n3,n0,
+           NULL,NULL,NULL,NULL,
+           g1,g2,g3,g0,
+           NULL,NULL,NULL,NULL,
+           i1,i2,i3,i0,
+           NULL,NULL,NULL,NULL,
+           u1,u2,u3,u0,
+           NULL,NULL,NULL,NULL,
+           o1,o2,o3,o0,
+           nrow = 11, ncol = 4,
+           rel_widths = c( 1, 1, 1, 1 ), 
+           rel_heights = c(1,-0.15,1,-0.15,1,-0.15,1,-0.15,1,-0.15,1) ,
+           align = 'h' )
+dev.off()
 
+png(paste0(figp,'scatter_hist_mesoz_chl_biomes_global_CAN_log_obsglm_LC45.png'), 
+    width = 8*300,        # 5 x 300 pixels
+    height = 2*300,
+    res = 300,            # 300 pixels per inch
+    pointsize = 8)
+plot_grid( c1,c2,c3,c0,
+           nrow = 1, ncol = 4,
+           rel_widths = c( 1, 1, 1, 1), rel_heights = c( 1, 1, 1, 1 ) ,
+           align = 'h' )
+dev.off()
 
 

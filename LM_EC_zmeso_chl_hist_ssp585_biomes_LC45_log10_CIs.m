@@ -1,5 +1,5 @@
 % Linear regressions of zmeso biomass with surf chl 
-% Tropical regions, annual climatology
+% Annual climatology, global and biomes
 % Historic and SSP585
 
 clear all

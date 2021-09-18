@@ -6,7 +6,7 @@ clear all
 close all
 
 %%
-load('skill_hist_model_obsglm_climatols.mat')
+load('skill_hist_model_obsglm100_climatols.mat')
 
 sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
 
@@ -159,7 +159,7 @@ simtext = {'CAN','CMCC','CNRM','GFDL','IPSL','UK'};
 simtex = {'CA','CM','CN','GF','IP','UK'};
 ctext = {'All','Winter','Spring','Summer','Fall'};
 
-save('skill_scores_hist_model_obsglm_clim_neg11_4rt.mat','skill','simtext','metrics','ctext')
+save('skill_scores_hist_model_obsglm100_clim_neg11_4rt.mat','skill','simtext','metrics','ctext')
 
 % Bar graphs
 % figure(1)
@@ -282,10 +282,10 @@ Ttrmse = array2table(trmse,'RowNames',simtext,'VariableNames',ctext);
 bias = squeeze(skill(11,:,:));
 Tbias = array2table(bias,'RowNames',simtext,'VariableNames',ctext);
 
-writetable(Tcorr,[sfile 'corr_hist_clims_200_obsglm_neg11_4rt.csv'],'WriteRowNames',true);
-writetable(Trmse,[sfile 'rmse_hist_clims_200_obsglm_neg11_4rt.csv'],'WriteRowNames',true);
-writetable(Tnstd,[sfile 'nstd_hist_clims_200_obsglm_neg11_4rt.csv'],'WriteRowNames',true);
-writetable(Turmse,[sfile 'urmse_hist_clims_200_obsglm_neg11_4rt.csv'],'WriteRowNames',true);
-writetable(Ttrmse,[sfile 'trmse_hist_clims_200_obsglm_neg11_4rt.csv'],'WriteRowNames',true);
-writetable(Tbias,[sfile 'bias_hist_clims_200_obsglm_neg11_4rt.csv'],'WriteRowNames',true);
+writetable(Tcorr,[sfile 'corr_hist_clims_200_obsglm100_neg11_4rt.csv'],'WriteRowNames',true);
+writetable(Trmse,[sfile 'rmse_hist_clims_200_obsglm100_neg11_4rt.csv'],'WriteRowNames',true);
+writetable(Tnstd,[sfile 'nstd_hist_clims_200_obsglm100_neg11_4rt.csv'],'WriteRowNames',true);
+writetable(Turmse,[sfile 'urmse_hist_clims_200_obsglm100_neg11_4rt.csv'],'WriteRowNames',true);
+writetable(Ttrmse,[sfile 'trmse_hist_clims_200_obsglm100_neg11_4rt.csv'],'WriteRowNames',true);
+writetable(Tbias,[sfile 'bias_hist_clims_200_obsglm100_neg11_4rt.csv'],'WriteRowNames',true);
 
