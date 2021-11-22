@@ -6,7 +6,7 @@ clear all
 close all
 
 %fpath='/Users/cpetrik/Dropbox/ESM_data/Fish-MIP/CMIP6/GFDL/hist/';
-fpath='/Volumes/MIP/Fish-MIP/CMIP6/CNRM-ESM2-1/';
+fpath='/Volumes/MIP/Fish-MIP/CMIP6/CNRM-ESM2-1/hist/';
 
 %% Meso Zoop zall
 ncdisp([fpath 'zmeso_Omon_CNRM-ESM2-1_historical_r1i1p1f2_gn_200001-201412.nc'])

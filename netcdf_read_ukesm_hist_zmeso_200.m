@@ -7,7 +7,7 @@ clear all
 close all
 
 %fpath='/Users/cpetrik/Dropbox/ESM_data/Fish-MIP/CMIP6/GFDL/hist/';
-fpath='/Volumes/MIP/Fish-MIP/CMIP6/UKESM1-0-LL/';
+fpath='/Volumes/MIP/Fish-MIP/CMIP6/UKESM1-0-LL/hist/';
 
 %% Meso Zoop zall
 ncdisp([fpath 'ukesm1-0-ll_r1i1p1f2_historical_zmeso_onedeg_global_monthly_1850_2014.nc'])

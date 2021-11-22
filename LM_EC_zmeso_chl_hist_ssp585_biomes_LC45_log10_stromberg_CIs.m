@@ -108,6 +108,16 @@ noCypred4 = predict(noCmdl4,Hist.slop(2:6,4));
 test=mdl1.Coefficients;
 tt=table2array(test);
 
+%% Put all slope coeffs in table
+simtext = {'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM'};
+sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
+
+Tmeanz = array2table(zmeans,'RowNames',simtext,'VariableNames',...
+    {'Global','LC','HCSS','HCPS'});
+writetable(Tmeanz,[sfile 'means_areaw_hist_aclim_zmeso200_obsglm100_strom_global_biomes.csv'],'WriteRowNames',true);
+save('means_areaw_hist_aclim_zmeso200_obsglm100_strom_global_biomes.mat',...
+    'Tmeanz','zmeans');
+
 %% Figures
 x = (-1:0.5:6);
 xs = -1:0.5:6;

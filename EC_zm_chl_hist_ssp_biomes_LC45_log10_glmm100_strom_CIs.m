@@ -63,6 +63,16 @@ X=[mo fliplr(mo)];
 % hzoo3CI =[CI3(:,3); flipud(CI3(:,2))]; 
 % hzoo4CI =[CIG(:,3); flipud(CIG(:,2))]; 
 
+%% Put all slope coeffs in table
+simtext = {'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM'};
+sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
+
+Tmeanz = array2table(zmeans,'RowNames',simtext,'VariableNames',...
+    {'Global','LC','HCSS','HCPS'});
+writetable(Tmeanz,[sfile 'means_areaw_hist_aclim_zmeso200_obsglm100_strom_global_biomes.csv'],'WriteRowNames',true);
+save('means_areaw_hist_aclim_zmeso200_obsglm100_strom_global_biomes.mat',...
+    'Tmeanz','zmeans');
+
 %% color same as Taylor diagrams
 cb=[34/255 136/255 51/255;...   %green
     153/255 153/255 51/255;...  %olive
@@ -148,18 +158,18 @@ Su4 = bSM(1)*ones(size(xs)) + 2*bSMse(1);
 f1 = figure('Units','inches','Position',[1 1 9 8]);
 % Global
 subplot(4,4,1)
-plot(log10(chl),hzoo4,'LineWidth',2); hold on;
+plot(log10(chl),hzoo4,'LineWidth',1.5); hold on;
 ylim([-6 3])
 xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
 title('Hist')
-lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','SM'}); 
+lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','obsSM'}); 
 lg.Position(1:2) = [.725 .45];
 lg.AutoUpdate = 'off';
 %fill(X,hzoo4CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25) %plot filled area
 
 subplot(4,4,2)
-plot(log10(chl),szoo4,'LineWidth',2)
+plot(log10(chl),szoo4,'LineWidth',1.5)
 ylim([-6 3])
 xlim([round(cmin) round(cmax)])
 title('SSP 585')
@@ -181,7 +191,7 @@ title('Future chl sensitivity')
 
 %LC
 subplot(4,4,5)
-plot(log10(chl),hzoo1,'LineWidth',2); hold on;
+plot(log10(chl),hzoo1,'LineWidth',1.5); hold on;
 %fill(X,hzoo1CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-6 5])
 xlim([round(cmin) round(cmax)])
@@ -189,7 +199,7 @@ ylabel({'LC','log_1_0 zmeso'})
 text(-8.5,-35,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
 
 subplot(4,4,6)
-plot(log10(chl),szoo1,'LineWidth',2)
+plot(log10(chl),szoo1,'LineWidth',1.5)
 ylim([-6 5])
 xlim([round(cmin) round(cmax)])
 
@@ -209,14 +219,14 @@ axis([0 2.5 0 2.5])
 
 %HCSS
 subplot(4,4,9)
-plot(log10(chl),hzoo2,'LineWidth',2); hold on;
+plot(log10(chl),hzoo2,'LineWidth',1.5); hold on;
 %fill(X,hzoo2CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 xlim([round(cmin) round(cmax)])
 ylim([-10 7])
 ylabel({'HCSS','log_1_0 zmeso'})
 
 subplot(4,4,10)
-plot(log10(chl),szoo2,'LineWidth',2)
+plot(log10(chl),szoo2,'LineWidth',1.5)
 xlim([round(cmin) round(cmax)])
 ylim([-10 7])
 
@@ -236,7 +246,7 @@ axis([0 4 0 6])
 
 %HCPS
 subplot(4,4,13)
-plot(log10(chl),hzoo3,'LineWidth',2); hold on;
+plot(log10(chl),hzoo3,'LineWidth',1.5); hold on;
 %fill(X,hzoo1CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-10 5])
 xlim([round(cmin) round(cmax)])
@@ -244,7 +254,7 @@ xlabel('log_1_0 chl (mg m^-^3)')
 ylabel({'HCPS','log_1_0 zmeso'})
 
 subplot(4,4,14)
-plot(log10(chl),szoo3,'LineWidth',2)
+plot(log10(chl),szoo3,'LineWidth',1.5)
 ylim([-10 5])
 xlim([round(cmin) round(cmax)])
 xlabel('log_1_0 chl (mg m^-^3)')
@@ -270,10 +280,10 @@ print('-dpng',[figp 'Hist_SSP585_lm_EC_zmeso_chl_global_biomes_LC45_glmm100_stro
 f4 = figure('Units','inches','Position',[1 1 9 8]);
 subplot(4,4,1)
 for i=2:8
-    plot(log10(chl),hzoo4(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),hzoo4(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 ylim([-2 2])
-lg  = legend({'CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','SM'}); 
+lg  = legend({'CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','obsSM'}); 
 lg.Position(1:2) = [.71 .45];
 lg.AutoUpdate = 'off';
 %fill(X,hzoo4CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
@@ -283,7 +293,7 @@ ylabel({'Global','log_1_0 zmeso'})
 
 subplot(4,4,2)
 for i=2:6
-    plot(log10(chl),szoo4(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),szoo4(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 ylim([-2 2])
 xlim([round(cmin) round(cmax)])
@@ -307,7 +317,7 @@ title('Future chl sensitivity')
 %LC
 subplot(4,4,5)
 for i=2:8
-    plot(log10(chl),hzoo1(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),hzoo1(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 %fill(X,hzoo1CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-3 4])
@@ -317,7 +327,7 @@ text(-8.5,-30,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
 
 subplot(4,4,6)
 for i=2:6
-    plot(log10(chl),szoo1(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),szoo1(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 ylim([-3 4])
 xlim([round(cmin) round(cmax)])
@@ -339,7 +349,7 @@ axis([0 2.5 0 2.5])
 %HCSS
 subplot(4,4,9)
 for i=2:8
-    plot(log10(chl),hzoo2(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),hzoo2(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 %fill(X,hzoo2CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-4 3])
@@ -348,7 +358,7 @@ ylabel({'HCSS','log_1_0 zmeso'})
 
 subplot(4,4,10)
 for i=2:6
-    plot(log10(chl),szoo2(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),szoo2(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 ylim([-4 3])
 xlim([round(cmin) round(cmax)])
@@ -370,7 +380,7 @@ axis([-0.2 2 -0.2 1.4])
 %HCPS
 subplot(4,4,13)
 for i=2:8
-    plot(log10(chl),hzoo3(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),hzoo3(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 %fill(X,hzoo3CI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25)
 ylim([-1.5 1])
@@ -380,7 +390,7 @@ ylabel({'HCPS','log_1_0 zmeso'})
 
 subplot(4,4,14)
 for i=2:6
-    plot(log10(chl),szoo3(i,:),'color',cb(i,:),'LineWidth',2); hold on;
+    plot(log10(chl),szoo3(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 ylim([-1.5 1])
 xlim([round(cmin) round(cmax)])
@@ -391,9 +401,9 @@ plot(x,x,'--k'); hold on;
 for i=2:6
     plot(Hist.slop(i,3),SSP.slop(i,3),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-plot(Oy3,xs,'color',[0.4 0.4 0.4]); hold on;
-plot(Ol3,xs,':','color',[0.4 0.4 0.4]); hold on;
-plot(Ou3,xs,':','color',[0.4 0.4 0.4]); hold on;
+plot(Oy3,xs,'k'); hold on;
+plot(Ol3,xs,':k'); hold on;
+plot(Ou3,xs,':k'); hold on;
 plot(Sy3,xs,'color',[0.4 0.4 0.4]); hold on;
 plot(Sl3,xs,':','color',[0.4 0.4 0.4]); hold on;
 plot(Su3,xs,':','color',[0.4 0.4 0.4]); hold on;

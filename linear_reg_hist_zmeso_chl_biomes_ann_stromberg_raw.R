@@ -17,7 +17,7 @@ datap = "/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_st
 #Zm <- read.csv(paste0(datap,"skill_hist_model_obsglm100_all_clim_200.csv"),sep=",",header = T,stringsAsFactors = F)
 #Chl <- read.csv(paste0(datap,"hist_chl_model_obsglm100_all_clim.csv"),sep=",",header = T,stringsAsFactors = F)
 Zm <- read.csv(paste0(datap,"skill_hist_Stromberg_all_clim_200.csv"),sep=",",header = T,stringsAsFactors = F)
-Chl <- read.csv(paste0(datap,"hist_chl_globcolour_all_clim.csv"),sep=",",header = T,stringsAsFactors = F)
+Chl <- read.csv(paste0(datap,"hist_chl_seawifs_all_clim.csv"),sep=",",header = T,stringsAsFactors = F)
 
 SM <- as.data.frame(Zm)
 SM[,5] <- as.data.frame(Chl[,3])

@@ -15,9 +15,9 @@ szmo_all = zmo_all;
 clear lat lon
 
 %% Biomes
-bpath='/Volumes/MIP/Fish-MIP/CMIP6/biome_masks/new_Ryan_chl/';
+bpath='/Volumes/MIP/Fish-MIP/CMIP6/biome_masks/';
 
-load([bpath 'data_biomes_MODISAqua_x1.mat']);
+load([bpath 'SeaWiFS_based_biomes_x1.mat']);
 [lat_b,lon_b] = meshgrid(lat,lon);
 
 %% check orientations
@@ -26,7 +26,7 @@ pcolor(szmo_all); shading flat;
 title('Obs')
 
 figure(2)
-pcolor(biomes); shading flat;
+pcolor(sbiomes); shading flat;
 title('obs')
 
 figure(3)
@@ -41,8 +41,6 @@ title('Blat')
 close all
 
 szmo_all = fliplr(szmo_all);
-biomes = fliplr(biomes);
-lat_b = fliplr(lat_b);
 lat_m = fliplr(lat_m);
 
 %% save same orientation
@@ -56,7 +54,7 @@ save('cmip6_hist_space_means_50yr_zmeso200_glmm100_same_orientation.mat',...
 mod_all = (szmo_all(:)) * 1e-3;
 
 %% ADD BIOMES
-bvec = biomes(:);
+bvec = sbiomes(:);
 
 %% all clim
 lat = lat_b(:);
