@@ -11,6 +11,10 @@ ppath = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_f
 cpath = '/Volumes/MIP/Fish-MIP/CMIP6/CanESM5/';
 load([cpath 'can_hist_ssp585_space_means_zmeso200_schl_sst.mat']);
 
+%% CMCC
+mpath = '/Volumes/MIP/Fish-MIP/CMIP6/CMCC/';
+load([mpath 'cmcc_hist_ssp585_space_means_zmeso200_schl_sst.mat']);
+
 %% CNRM
 npath = '/Volumes/MIP/Fish-MIP/CMIP6/CNRM-ESM2-1/';
 load([npath 'cnrm_hist_ssp585_space_means_zmeso200_schl_sst.mat']);
@@ -34,12 +38,14 @@ load([gpath 'hist/gfdl_hist_zmeso200_onedeg_climatol_1965_2014.mat'],...
 %all models in molC: 12.01 g C in 1 mol C
 %1e3 mg in 1 g
 HCzm = HCzm50 * 12.01 * 1e3;
+HMzm = HMzm50 * 12.01 * 1e3;
 HNzm = HNzm50 * 12.01 * 1e3;
 HGzm = HGzm50 * 12.01 * 1e3;
 HIzm = HIzm50 * 12.01 * 1e3;
 HUzm = HUzm50 * 12.01 * 1e3;
 
 FCzm = FCzm50 * 12.01 * 1e3;
+FMzm = FMzm50 * 12.01 * 1e3;
 FNzm = FNzm50 * 12.01 * 1e3;
 FGzm = FGzm50 * 12.01 * 1e3;
 FIzm = FIzm50 * 12.01 * 1e3;
@@ -48,12 +54,14 @@ FUzm = FUzm50 * 12.01 * 1e3;
 %chl in kg m-3', put in g m-3 
 %chl in g m-3', put in mg m-3 (CNRM & IPSL)
 HCchl = HCchl50 * 1e6;
+HMchl = HMchl50 * 1e6;
 HGchl = HGchl50 * 1e6;
 HUchl = HUchl50 * 1e6;
 HNchl = HNchl50 * 1e3;
 HIchl = HIchl50 * 1e3;
 
 FCchl = FCchl50 * 1e6;
+FMchl = FMchl50 * 1e6;
 FGchl = FGchl50 * 1e6;
 FUchl = FUchl50 * 1e6;
 FNchl = FNchl50 * 1e3;
@@ -71,6 +79,11 @@ figure
 pcolor(HCzm)
 shading flat
 title('CAN')
+
+figure
+pcolor(HMzm)
+shading flat
+title('CMCC')
 
 figure
 pcolor(HNzm)
@@ -100,6 +113,11 @@ shading flat
 title('CAN')
 
 figure
+pcolor(FMzm)
+shading flat
+title('CMCC')
+
+figure
 pcolor(FNzm)
 shading flat
 title('CNRM')
@@ -125,6 +143,11 @@ figure
 pcolor(HCchl)
 shading flat
 title('CAN')
+
+figure
+pcolor(HMchl)
+shading flat
+title('CMCC')
 
 figure
 pcolor(HNchl)
@@ -154,6 +177,11 @@ shading flat
 title('CAN')
 
 figure
+pcolor(FMchl)
+shading flat
+title('CMCC')
+
+figure
 pcolor(FNchl)
 shading flat
 title('CNRM')
@@ -181,6 +209,11 @@ shading flat
 title('CAN')
 
 figure
+pcolor(HMsst50)
+shading flat
+title('CMCC')
+
+figure
 pcolor(HNsst50)
 shading flat
 title('CNRM')
@@ -206,6 +239,11 @@ figure
 pcolor(FCsst50)
 shading flat
 title('CAN')
+
+figure
+pcolor(FMsst50)
+shading flat
+title('CMCC')
 
 figure
 pcolor(FNsst50)
@@ -248,6 +286,16 @@ FIsst50 = fliplr(FIsst50);
 FGsst50 = fliplr(FGsst50);
 FUsst50 = fliplr(FUsst50);
 lat_g = fliplr(lat_g);
+
+%% save same orientation
+save('cmip6_hist_ssp585_space_means_50yr_zmeso200_schl_sst_same_orientation.mat',...
+    'HCzm','HMzm','HNzm','HGzm','HIzm','HUzm',...
+    'FCzm','FMzm','FNzm','FGzm','FIzm','FUzm',...
+    'HCchl','HMchl','HNchl','HGchl','HIchl','HUchl',...
+    'FCchl','FMchl','FNchl','FGchl','FIchl','FUchl',...
+    'HCsst50','HMsst50','HNsst50','HGsst50','HIsst50','HUsst50',...
+    'FCsst50','FMsst50','FNsst50','FGsst50','FIsst50','FUsst50',...
+    'lat_g','lon_g');
 
 %% Diffs 
 diff_ct = FCsst50 - HCsst50;
