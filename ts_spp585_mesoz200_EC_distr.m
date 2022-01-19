@@ -148,6 +148,31 @@ ylabel('Probability density')
 text(-30,0.1,'C')
 print('-dpng',[ppath 'Pdiff_Raw_hist_ssp585_tsmeans_zmeso200_ECdistr.png'])
 
+%%
+figure('Units','inches','Position',[1 1 10 4]);
+
+% Percent change from 1965
+subplot(1,2,1)
+plot(Myr,mF,'-.k','LineWidth',1.5); hold on;
+plot(Myr,mE,'k','LineWidth',1.5); hold on;
+fill(X,FCI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on;
+fill(X,ECI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on;
+ylabel('% \Delta Mesozoo')
+xlabel('Year')
+text(1965,6,'A','FontWeight','Bold','FontSize',14)
+xlim([1965 2100])
+legend('full','constrained')
+legend('location','southwest')
+
+% PDFs of % change
+subplot(1,2,2)
+plot(pc,Fpdf_norm,'-.k','LineWidth',2); hold on;
+plot(pc,Epdf_norm,'k','LineWidth',2); hold on;
+xlabel('% \Delta Mesozoo')
+ylabel('Probability density')
+text(-30,0.073,'B','FontWeight','Bold','FontSize',14)
+print('-dpng',[ppath 'Pdiff_hist_ssp585_zmeso200_ECdistr.png'])
+
 
 
 

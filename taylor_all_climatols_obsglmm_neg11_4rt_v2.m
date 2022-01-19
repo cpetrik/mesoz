@@ -12,9 +12,9 @@ load('skill_scores_hist_model_obsglm_clim_raw_4rt.mat')
 
 figp ='/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_figs/';
 
-mtex = {'ref','CAN','CMCC','CNRM','GFDL','IPSL','UK'};
+mtex = {'obsGLMM','CAN','CMCC','CNRM','GFDL','IPSL','UK'};
 stext = {'All','Winter','Spring','Summer','Fall'};
-atex = {'ref','Annual','Winter','Spring','Summer','Fall',...
+atex = {'obsGLMM','Annual','Winter','Spring','Summer','Fall',...
     'CAN','CMCC','CNRM','GFDL','IPSL','UK'};
 
 rtl1 = (90 - [30,60,90])/100;

@@ -36,8 +36,8 @@ Hist.slop(10,:) = MchlB';
 
 Hist.int(7,:) = [aOG(2:4)' aOG(1)];
 Hist.int(8,:) = [aSM(2:4)' aSM(1)];
-Hist.int(9,:) = SchlA';
-Hist.int(10,:) = MchlA';
+Hist.int(9,:) = SchlA' .* 1e-3; %in mgC, should be gC
+Hist.int(10,:) = MchlA' .* 1e-3;
 
 %% predict mesozoo over chl values
 % Models have a very large range
@@ -62,9 +62,9 @@ cb=[34/255 136/255 51/255;...   %green
     238/255 102/255 119/255;... %red
     170/255 51/255 119/255;...  %purple
     0 0 0;...                   %black
-    0.3 0.3 0.3;...             %dk grey
-    0.6 0.6 0.6;...             %lt grey
-    0.6 0.6 0.6];               %lt grey
+    0.25 0.25 0.25;...             %dk grey
+    0.50 0.50 0.50;...             % grey
+    0.75 0.75 0.75];               %lt grey
 
 set(groot,'defaultAxesColorOrder',cb);
 
@@ -163,20 +163,20 @@ f1 = figure('Units','inches','Position',[1 1 9 12]);
 %subplot(4,4,1)
 subplot('Position',[0.1 0.765 0.25 0.2])
 plot(log10(chl),hzoo4,'LineWidth',1.5); hold on;
-ylim([-6 4])
+ylim([-5 2])
 xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
-title('Hist relationship')
-lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','obsSM','obsC1','obsC2'}); 
+title('Historic relationship')
+lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCS','obsCM'}); 
 lg.Position(1:2) = [.75 .45];
 lg.AutoUpdate = 'off';
-text(-2,4.5,'A','FontWeight','Bold','FontSize',14)
+text(-2,2.4,'A','FontWeight','Bold','FontSize',14)
 
 subplot('Position',[0.45 0.765 0.25 0.2])
 plot(Oy4,xs,'k','LineWidth',1.5); hold on;
-plot(Sy4,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy4,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy4,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy4,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy4,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy4,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,ypred4,'--k','LineWidth',1.5); hold on;
 for i=1:6
     plot(Hist.slop(i,4),log_diff(i,1),'.','color',cb(i,:),'MarkerSize',20); hold on;
@@ -189,7 +189,7 @@ text(0.02,0.0625,'B','FontWeight','Bold','FontSize',14)
 % LC
 subplot('Position',[0.1 0.525 0.25 0.2])
 plot(log10(chl),hzoo1,'LineWidth',1.5); hold on;
-ylim([-6 5])
+ylim([-6 4])
 xlim([round(cmin) round(cmax)])
 ylabel({'LC','log_1_0 zmeso'})
 text(-8.5,-35,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
@@ -197,9 +197,9 @@ text(-8.5,-35,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
 subplot('Position',[0.45 0.525 0.25 0.2])
 plot(x,x,':k'); hold on;
 plot(Oy1,xs,'k','LineWidth',1.5); hold on;
-plot(Sy1,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy1,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy1,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy1,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy1,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy1,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,ypred1,'--k','LineWidth',1.5); hold on;
 for i=1:6
     plot(Hist.slop(i,1),log_diff(i,2),'.','color',cb(i,:),'MarkerSize',20); hold on;
@@ -211,14 +211,14 @@ ylabel('\Delta (log_1_0 zmeso)')
 subplot('Position',[0.1 0.29 0.25 0.2])
 plot(log10(chl),hzoo2,'LineWidth',1.5); hold on;
 xlim([round(cmin) round(cmax)])
-ylim([-6 5])
+ylim([-6 4])
 ylabel({'HCSS','log_1_0 zmeso'})
 
 subplot('Position',[0.45 0.29 0.25 0.2])
 plot(Oy2,xs,'k','LineWidth',1.5); hold on;
-plot(Sy2,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy2,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy2,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy2,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy2,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy2,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,ypred2,'--k','LineWidth',1.5); hold on;
 for i=1:6
     plot(Hist.slop(i,2),log_diff(i,3),'.','color',cb(i,:),'MarkerSize',20); hold on;
@@ -229,22 +229,22 @@ ylabel('\Delta (log_1_0 zmeso)')
 % HCPS
 subplot('Position',[0.1 0.05 0.25 0.2])
 plot(log10(chl),hzoo3,'LineWidth',1.5); hold on;
-ylim([-6 5])
+ylim([-5 2])
 xlim([round(cmin) round(cmax)])
 xlabel('log_1_0 chl (mg m^-^3)')
 ylabel({'HCPS','log_1_0 zmeso'})
 
 subplot('Position',[0.45 0.05 0.25 0.2])
 plot(Oy3,xs,'k','LineWidth',1.5); hold on;
-plot(Sy3,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy3,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy3,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy3,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy3,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy3,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,ypred3,'--k','LineWidth',1.5); hold on;
 for i=1:6
     plot(Hist.slop(i,3),log_diff(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
 axis([-0.5 3 -0.15 0.0])
-xlabel('Historic relationship')
+xlabel('Slope of historic relationship')
 ylabel('\Delta (log_1_0 zmeso)')
 
 print('-dpng',[figp 'Hist_lm_SSP585_delta_log10_EC_global_histbiomes_cope.png'])
@@ -257,20 +257,20 @@ subplot('Position',[0.1 0.765 0.25 0.2])
 for i=2:10
     plot(log10(chl),hzoo4(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
-ylim([-2 4])
+ylim([-2 2])
 xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
-title('Hist relationship')
-lg  = legend({'CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','obsSM','obsC1','obsC2'}); 
+title('Historic relationship')
+lg  = legend({'CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCS','obsCM'}); 
 lg.Position(1:2) = [.75 .45];
 lg.AutoUpdate = 'off';
-text(-2,4.4,'A','FontWeight','Bold','FontSize',14)
+text(-2,2.3,'A','FontWeight','Bold','FontSize',14)
 
 subplot('Position',[0.45 0.765 0.25 0.2])
 plot(Oy4,xs,'k','LineWidth',1.5); hold on;
-plot(Sy4,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy4,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy4,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy4,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy4,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy4,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,noCypred4,'--k','LineWidth',1.5); hold on;
 for i=2:6
     plot(Hist.slop(i,4),log_diff(i,1),'.','color',cb(i,:),'MarkerSize',20); hold on;
@@ -293,9 +293,9 @@ text(-8.5,-35,'log_1_0 zmeso (mgC m^-^2)','Rotation',90)
 subplot('Position',[0.45 0.525 0.25 0.2])
 plot(x,x,':k'); hold on;
 plot(Oy1,xs,'k','LineWidth',1.5); hold on;
-plot(Sy1,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy1,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy1,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy1,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy1,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy1,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,noCypred1,'--k','LineWidth',1.5); hold on;
 for i=2:6
     plot(Hist.slop(i,1),log_diff(i,2),'.','color',cb(i,:),'MarkerSize',20); hold on;
@@ -309,14 +309,14 @@ for i=2:10
     plot(log10(chl),hzoo2(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
 xlim([round(cmin) round(cmax)])
-ylim([-4 4])
+ylim([-3 3])
 ylabel({'HCSS','log_1_0 zmeso'})
 
 subplot('Position',[0.45 0.29 0.25 0.2])
 plot(Oy2,xs,'k','LineWidth',1.5); hold on;
-plot(Sy2,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy2,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy2,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy2,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy2,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy2,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,noCypred2,'--k','LineWidth',1.5); hold on;
 for i=2:6
     plot(Hist.slop(i,2),log_diff(i,3),'.','color',cb(i,:),'MarkerSize',20); hold on;
@@ -329,22 +329,22 @@ subplot('Position',[0.1 0.05 0.25 0.2])
 for i=2:10
     plot(log10(chl),hzoo3(i,:),'color',cb(i,:),'LineWidth',1.5); hold on;
 end
-ylim([-1.5 4])
+ylim([-1.5 1.5])
 xlim([round(cmin) round(cmax)])
 xlabel('log_1_0 chl (mg m^-^3)')
 ylabel({'HCPS','log_1_0 zmeso'})
 
 subplot('Position',[0.45 0.05 0.25 0.2])
 plot(Oy3,xs,'k','LineWidth',1.5); hold on;
-plot(Sy3,xs,'color',[0.3 0.3 0.3],'LineWidth',1.5); hold on;
-plot(CSy3,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
-plot(CMy3,xs,'color',[0.6 0.6 0.6],'LineWidth',1.5); hold on;
+plot(Sy3,xs,'color',[0.25 0.25 0.25],'LineWidth',1.5); hold on;
+plot(CSy3,xs,'color',[0.5 0.5 0.5],'LineWidth',1.5); hold on;
+plot(CMy3,xs,'color',[0.75 0.75 0.75],'LineWidth',1.5); hold on;
 plot(xpred,noCypred3,'--k','LineWidth',1.5); hold on;
 for i=2:6
     plot(Hist.slop(i,3),log_diff(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
 axis([-0.5 1 -0.125 0.0])
-xlabel('Historic relationship')
+xlabel('Slope of historic relationship')
 ylabel('\Delta (log_1_0 zmeso)')
 print('-dpng',[figp 'Hist_lm_SSP585_delta_log10_EC_global_histbiomes_cope_noCAN.png'])
 

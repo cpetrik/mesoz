@@ -177,6 +177,15 @@ gt2_s(361,:) = gtcorr2(360,:)+eps;
 it2_s(361,:) = itcorr2(360,:)+eps;
 ut2_s(361,:) = utcorr2(360,:)+eps;
 
+%% save same orient
+lat_corr = lat_s;
+lon_corr = lon_s;
+save('cmip6_hist_ssp585_corr_50yr_zmeso200_schl_sst_same_orientation',...
+    'cc_s','mc_s','nc_s','gc_s','ic_s','uc_s',...
+    'cc2_s','mc2_s','nc2_s','gc2_s','ic2_s','uc2_s',...
+    'ct_s','mt_s','nt_s','gt_s','it_s','ut_s',...
+    'ct2_s','mt2_s','nt2_s','gt2_s','it2_s','ut2_s','lat_corr','lon_corr')
+
 %% test function
 [lat2,lon2,gvar2] = cyclic_map_seam(lat_g,lon_g,gtcorr);
 

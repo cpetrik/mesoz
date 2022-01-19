@@ -319,7 +319,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,diff_gr)
 cmocean('balance')
 cb = colorbar('Position',[0.8 0.3 0.03 0.5],'orientation','vertical');
-xlabel(cb,'4rt zmeso (mgC m^-^2)')
+xlabel(cb,'4rt (zmeso mgC m^-^2)')
 caxis([-4 4])
 text(0.2,1.65,'GFDL','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -339,9 +339,9 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,diff_ur)
 cmocean('balance')
 caxis([-4 4])
-text(0.2,1.65,'UKESM','HorizontalAlignment','center','FontWeight','bold')
+text(0.2,1.65,'UK','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
-stamp(stex)
+%stamp(stex)
 print('-dpng',[ppath 'Map_bias_all_hist_clim_glmm100_4rt_scale_4rt.png'])
 
 %% Bias -1 to 1 Map

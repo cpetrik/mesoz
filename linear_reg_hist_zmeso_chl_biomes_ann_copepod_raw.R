@@ -25,6 +25,10 @@ MM <- as.data.frame(Zm[,c("Lat","Lon","zmeso200","MODISchl","MODISbiomes")])
 MM <- na.omit(MM)
 names(MM) <- c("Lat","Lon","zmeso200","chl","biome")
 
+# from mgC to gC
+SM$zmeso200 <- SM$zmeso200*1e-3
+MM$zmeso200 <- MM$zmeso200*1e-3
+
 SM$Lzmeso <- log10(SM$zmeso200+1e-16)
 MM$Lzmeso <- log10(MM$zmeso200+1e-16)
 
@@ -126,7 +130,7 @@ CI3$Lchl <- log10(pchl)
 m1 <- ggplot(subset(MM,biome==1), aes(y=zmeso200, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
-  ylab("obsGLMM chl") + xlab("") + ggtitle("LC") +
+  ylab("zmeso") + xlab("obsGLMM chl") + ggtitle("LC") +
   scale_y_log10() + scale_x_log10(limits=c(0.02,0.15)) + theme(legend.position='none')
 m2 <- ggplot(subset(MM,biome==2), aes(y=zmeso200, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
@@ -139,7 +143,7 @@ m3 <- ggplot(subset(MM,biome==3), aes(y=zmeso200, x=chl)) + theme_bw(base_size=1
   ylab("") + xlab("") + ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 m0 <- ggplot(MM, aes(y=zmeso200, x=chl)) + theme_bw(base_size=12) +  
-  geom_bin2d(bins = 500) + scale_fill_continuous(type = "viridis") + 
+  geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
   ylab("") + xlab("") + ggtitle("Global") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
@@ -147,7 +151,7 @@ m0 <- ggplot(MM, aes(y=zmeso200, x=chl)) + theme_bw(base_size=12) +
 s1 <- ggplot(subset(SM,biome==1), aes(y=zmeso200, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + #, se=FALSE, col="blue", size = 0.25) +  
-  ylab("Stromberg chl") + xlab("") + #ggtitle("LC") +
+  ylab("zmeso") + xlab("Stromberg chl") + #ggtitle("LC") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 s2 <- ggplot(subset(SM,biome==2), aes(y=zmeso200, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 

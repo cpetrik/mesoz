@@ -27,3 +27,6 @@ zoo_200 = zoo_g*200;
 zmax = nanmax(zoo_g(:));
 zmin = nanmin(zoo_g(:));
 log10(zmax) - log10(zmin)
+
+qz = quantile(zoo_200(:),[0.01 0.99]);
+log10(qz(2)) - log10(qz(1))

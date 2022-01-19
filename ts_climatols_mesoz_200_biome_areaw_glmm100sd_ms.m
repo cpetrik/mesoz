@@ -192,7 +192,7 @@ plot(mo,Otps,'LineWidth',1.5); hold on;
 ylabel('HCPS')
 xlim([1 12])
 
-lg = legend(nexttile(3),{'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM/sat'});
+lg = legend(nexttile(3),{'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM/sat'});
 lg.Location = 'eastoutside';
 print('-dpng',[ppath 'Hist_clim_biome_areaw_means_zmeso200_schl_sst_glmm100SDs.png'])
 
@@ -332,7 +332,7 @@ plot(mo,Utps,'LineWidth',1.5); hold on;
 ylabel('HCPS')
 xlim([1 12])
 
-lg = legend(nexttile(1),{'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM'});
+lg = legend(nexttile(1),{'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM'});
 lg.Location = 'westoutside';
 print('-dpng',[ppath 'Hist_clim_biome_areaw_means_zmeso200_schl_sst_glmm100SDs_noOBS.png'])
 

@@ -272,7 +272,7 @@ u0 <- ggplot(UM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +
 o1 <- ggplot(subset(OG,biome==1), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) +  
-  ylab("obs mesoz") + xlab("chl") + #ggtitle("LC") +
+  ylab("obsGLMM") + xlab("chl") + #ggtitle("LC") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 o2 <- ggplot(subset(OG,biome==2), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
@@ -293,22 +293,22 @@ o0 <- ggplot(OG, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +
 s1 <- ggplot(subset(SM,biome==1), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + #, se=FALSE, col="blue", size = 0.25) +  
-  ylab("Stromberg mesoz") + xlab("") + #ggtitle("LC") +
+  ylab("obsSM") + xlab("chl") + #ggtitle("LC") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 s2 <- ggplot(subset(SM,biome==2), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
-  ylab("") + xlab("") + #ggtitle("HCSS") +
+  ylab("") + xlab("chl") + #ggtitle("HCSS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 s3 <- ggplot(subset(SM,biome==3), aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
-  ylab("") + xlab("") + #ggtitle("HCPS") +
+  ylab("") + xlab("chl") + #ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 s0 <- ggplot(SM, aes(y=mesoz, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
-  ylab("") + xlab("") + #ggtitle("HCPS") +
+  ylab("") + xlab("chl") + #ggtitle("HCPS") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 
 

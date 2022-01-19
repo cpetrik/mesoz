@@ -93,22 +93,22 @@ lat_2(361,:) = lat_m(360,:);
 biomes_m(361,:) = sbiomes(360,:);
 
 %% figure info
-f1 = figure('Units','inches','Position',[1 3 7.5 10]);
+f1 = figure('Units','inches','Position',[1 1 7.5 10]);
 %f1.Units = 'inches';
 
 %1 - Hist cmcc
-subplot('Position',[0.025 0.852 0.4 0.142])
+subplot('Position',[0.025 0.84 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,hmbiomes_s)
 colormap(cmv)
 %caxis([1 3])
-text(0,1.75,'Historical','HorizontalAlignment','center','FontWeight','bold')
+text(0,2.2,'Historical','HorizontalAlignment','center','FontWeight','bold')
 text(-1.75,1.75,'CMCC','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %2 - Hist cnrm
-subplot('Position',[0.025 0.71 0.4 0.142])
+subplot('Position',[0.025 0.70 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,hnbiomes_s)
@@ -118,7 +118,7 @@ text(-1.75,1.75,'CNRM','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %3 - Hist gfdl
-subplot('Position',[0.025 0.568 0.4 0.142])
+subplot('Position',[0.025 0.56 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,hgbiomes_s)
@@ -128,7 +128,7 @@ text(-1.75,1.75,'GFDL','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %4 - Hist IPSL
-subplot('Position',[0.025 0.426 0.4 0.142])
+subplot('Position',[0.025 0.42 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,hibiomes_s)
@@ -138,7 +138,7 @@ text(-1.75,1.75,'IPSL','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %5 - Hist uk
-subplot('Position',[0.025 0.284 0.4 0.142])
+subplot('Position',[0.025 0.28 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,hubiomes_s)
@@ -148,7 +148,7 @@ text(-1.75,1.75,'UK','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %6 - Hist obs
-subplot('Position',[0.025 0.142 0.4 0.142])
+subplot('Position',[0.025 0.14 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_o,lon_o,biomes_o)
@@ -158,7 +158,7 @@ text(-1.8,1.75,'obsGLMM')%,'HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %7 - Strom obs
-subplot('Position',[0.025 0.0 0.4 0.142])
+subplot('Position',[0.025 0.0 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,biomes_m)
@@ -167,19 +167,19 @@ colormap(cmv)
 text(-1.8,1.75,'obsSM')%,'HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
-% E - Fore CMCC
-subplot('Position',[0.43 0.852 0.4 0.142])
+% E - Fore CMCC ---------------------------------
+subplot('Position',[0.38 0.84 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,smbiomes_s)
 colormap(cmv)
 %caxis([1 3])
-text(0,1.75,'SSP5-8.5','HorizontalAlignment','center','FontWeight','bold')
+text(0,2.2,'SSP5-8.5','HorizontalAlignment','center','FontWeight','bold')
 text(-1.75,1.75,'CMCC','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %F - Fore CNRM
-subplot('Position',[0.43 0.71 0.4 0.142])
+subplot('Position',[0.38 0.70 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,snbiomes_s)
@@ -189,7 +189,7 @@ text(-1.75,1.75,'CNRM','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %G - Fore GFDL
-subplot('Position',[0.43 0.568 0.4 0.142])
+subplot('Position',[0.38 0.56 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,sgbiomes_s)
@@ -198,11 +198,11 @@ colormap(cmv)
 text(-1.75,1.75,'GFDL','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 caxis([1 3])
-colorbar('Position',[0.8 0.45 0.025 0.25],'Ticks',[1:3],...
+colorbar('Position',[0.7 0.45 0.025 0.25],'Ticks',[1:3],...
     'TickLabels',{'LC','HCSS','HCPS'});
 
 %H - Fore IPSL
-subplot('Position',[0.43 0.426 0.4 0.142])
+subplot('Position',[0.38 0.42 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,sibiomes_s)
@@ -212,7 +212,7 @@ text(-1.75,1.75,'IPSL','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 %5 - Fore uk
-subplot('Position',[0.43 0.284 0.4 0.142])
+subplot('Position',[0.38 0.28 0.35 0.14])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,subiomes_s)

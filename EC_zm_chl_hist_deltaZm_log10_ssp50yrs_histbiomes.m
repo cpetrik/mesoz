@@ -148,8 +148,8 @@ plot(log10(chl),hzoo4,'LineWidth',1.5); hold on;
 ylim([-6 3])
 xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
-title('Hist relationship')
-lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','obsSM'}); 
+title('Historic relationship')
+lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM'}); 
 lg.Position(1:2) = [.75 .45];
 lg.AutoUpdate = 'off';
 text(-2,3.5,'A','FontWeight','Bold','FontSize',14)
@@ -217,8 +217,8 @@ plot(xpred,ypred3,'--k','LineWidth',1.5); hold on;
 for i=1:6
     plot(Hist.slop(i,3),log_diff(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
-axis([-1 3 -0.15 0.0])
-xlabel('Historic relationship')
+axis([-0.5 3 -0.15 0.0])
+xlabel('Slope of historic relationship')
 ylabel('\Delta (log_1_0 zmeso)')
 
 print('-dpng',[figp 'Hist_lm_SSP585_delta_log10_EC_global_histbiomes.png'])
@@ -234,11 +234,11 @@ end
 ylim([-2 2])
 xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
-title('Hist relationship')
-lg  = legend({'CMCC','CNRM','GFDL','IPSL','UKESM','obsGLMM','obsSM'}); 
+title('Historic relationship')
+lg  = legend({'CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM'}); 
 lg.Position(1:2) = [.75 .45];
 lg.AutoUpdate = 'off';
-text(-2,3.5,'A','FontWeight','Bold','FontSize',14)
+text(-2,2.25,'A','FontWeight','Bold','FontSize',14)
 
 subplot('Position',[0.45 0.765 0.25 0.2])
 plot(Oy4,xs,'k','LineWidth',1.5); hold on;
@@ -250,7 +250,7 @@ end
 axis([0.25 1.25 -0.14 0.0])
 ylabel('\Delta (log_1_0 zmeso)')
 title('Future change')
-text(0.02,0.0625,'B','FontWeight','Bold','FontSize',14)
+text(0.25,0.009,'B','FontWeight','Bold','FontSize',14)
 
 % LC
 subplot('Position',[0.1 0.525 0.25 0.2])
@@ -310,7 +310,7 @@ for i=2:6
     plot(Hist.slop(i,3),log_diff(i,4),'.','color',cb(i,:),'MarkerSize',20); hold on;
 end
 axis([-0.5 1 -0.125 0.0])
-xlabel('Historic relationship')
+xlabel('Slope of historic relationship')
 ylabel('\Delta (log_1_0 zmeso)')
 print('-dpng',[figp 'Hist_lm_SSP585_delta_log10_EC_global_histbiomes_noCAN.png'])
 

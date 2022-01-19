@@ -129,10 +129,10 @@ lat_mc = fliplr(lat_mc);
 lat_mb = fliplr(lat_mb);
 
 %% Units
-% From m-3 to m-2 (integrate top 200m)
+% From mg m-3 to mg m-2 (integrate top 200m)
 dep200 = min(200,deptho);
 dep200(isnan(deptho(:))) = nan;
-zoo_200 = zoo_g .* dep200; %can't mult by 200 in coastal areas!!!
+zoo_200 = zoo_g .* dep200; 
 
 %% save same orientation
 save('space_means_copepod_zmeso200_chls_same_orientation.mat',...
@@ -141,7 +141,7 @@ save('space_means_copepod_zmeso200_chls_same_orientation.mat',...
 %% Vectorize, 
 comb(:,1) = lat_sc(:);
 comb(:,2) = lon_sc(:);
-comb(:,3) = zoo_200(:);
+comb(:,3) = zoo_200(:) .* 1e-3; % From mg to g
 comb(:,4) = schl_all(:);
 comb(:,5) = mchl_all(:);
 comb(:,6) = sbiomes(:);

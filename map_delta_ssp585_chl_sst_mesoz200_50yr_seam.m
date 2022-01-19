@@ -299,6 +299,7 @@ save('cmip6_hist_ssp585_space_means_50yr_zmeso200_schl_sst_same_orientation.mat'
 
 %% Diffs 
 diff_ct = FCsst50 - HCsst50;
+diff_mt = FMsst50 - HMsst50;
 diff_nt = FNsst50 - HNsst50;
 diff_gt = FGsst50 - HGsst50;
 diff_it = FIsst50 - HIsst50;
@@ -319,6 +320,7 @@ pdiff_uz = (FUzm - HUzm) ./ HUzm;
 
 %% Fix seam
 [lat_s,lon_s,diff_ct2] = cyclic_map_seam(lat_g,lon_g,diff_ct);
+[~,~,diff_mt2] = cyclic_map_seam(lat_g,lon_g,diff_mt);
 [~,~,diff_nt2] = cyclic_map_seam(lat_g,lon_g,diff_nt);
 [~,~,diff_gt2] = cyclic_map_seam(lat_g,lon_g,diff_gt);
 [~,~,diff_it2] = cyclic_map_seam(lat_g,lon_g,diff_it);
@@ -350,39 +352,48 @@ h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 subplot('Position',[0.41 0.68 0.4 0.3])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
+surfm(lat_s,lon_s,diff_mt2)
+cmocean('balance')
+caxis([-8 8])
+text(0.2,1.65,'CMCC','HorizontalAlignment','center','FontWeight','bold')
+h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
+
+subplot('Position',[0.01 0.37 0.4 0.3])
+axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
+    'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,diff_nt2)
 cmocean('balance')
 caxis([-8 8])
 text(0.2,1.65,'CNRM','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
-subplot('Position',[0.01 0.37 0.4 0.3])
+subplot('Position',[0.41 0.37 0.4 0.3])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,diff_gt2)
 cmocean('balance')
-caxis([-8 8])
-text(0.2,1.65,'GFDL','HorizontalAlignment','center','FontWeight','bold')
-h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
-
-subplot('Position',[0.41 0.37 0.4 0.3])
-axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
-    'Grid','off','FLineWidth',1)
-surfm(lat_s,lon_s,diff_it2)
-cmocean('balance')
 cb = colorbar('Position',[0.8 0.3 0.03 0.5],'orientation','vertical');
 xlabel(cb,'SST (^oC)')
 caxis([-8 8])
-text(0.2,1.65,'IPSL','HorizontalAlignment','center','FontWeight','bold')
+text(0.2,1.65,'GFDL','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
 subplot('Position',[0.01 0.06 0.4 0.3])
 axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
     'Grid','off','FLineWidth',1)
+surfm(lat_s,lon_s,diff_it2)
+cmocean('balance')
+caxis([-8 8])
+text(0.2,1.65,'IPSL','HorizontalAlignment','center','FontWeight','bold')
+h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
+
+subplot('Position',[0.41 0.06 0.4 0.3])
+axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
+    'Grid','off','FLineWidth',1)
 surfm(lat_s,lon_s,diff_ut2)
 cmocean('balance')
 caxis([-8 8])
-text(0.2,1.65,'UKESM','HorizontalAlignment','center','FontWeight','bold')
+text(0.2,1.65,'UK','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 print('-dpng',[ppath 'Map_SST_diff_Hist_SSP585_50yr.png'])
 

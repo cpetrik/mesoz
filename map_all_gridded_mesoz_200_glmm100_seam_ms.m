@@ -167,7 +167,7 @@ cmocean('tempo')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 caxis([2 4])
 set(gcf,'renderer','painters')
-text(0.2,1.65,'UKESM','HorizontalAlignment','center','FontWeight','bold')
+text(0.2,1.65,'UK','HorizontalAlignment','center','FontWeight','bold')
 
 print('-dpng',[ppath 'Map_all_hist_clim_glmm100_log10mgCm-2_int200m_ms.png'])
 
