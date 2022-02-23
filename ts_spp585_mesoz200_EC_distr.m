@@ -112,6 +112,10 @@ pc = -30:15;
 Fpdf_norm = pdf(Fpd,pc);
 Epdf_norm = pdf(Epd,pc);
 
+%% save
+save('ECdistr_fig_Pdiff_Raw_hist_ssp585_tsmeans_zmeso200.mat','yr','pdiff',...
+    'Myr','mF','X','FCI','mE','ECI','pc','Fpdf_norm','Epdf_norm')
+
 %% 2 x 3 change order
 figure('Units','inches','Position',[1 1 16 4]);
 

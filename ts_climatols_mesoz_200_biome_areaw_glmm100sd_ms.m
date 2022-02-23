@@ -56,7 +56,7 @@ title('mesozoo (mgC m^-^2)')
 ylabel('Global')
 xlim([1 12])
 ylim([0 1500])
-text(1,1970,'A','FontWeight','Bold','FontSize',14)
+text(1,1970,'a','FontWeight','Bold','FontSize',14)
 
 % CHL --------------------------------
 nexttile %subplot(4,3,2)
@@ -70,7 +70,7 @@ plot(mo,Oc,'LineWidth',1.5); hold on;
 title('chl (mg m^-^3)')
 ylabel('Global')
 xlim([1 12])
-text(1,0.525,'B','FontWeight','Bold','FontSize',14)
+text(1,0.525,'b','FontWeight','Bold','FontSize',14)
 
 % SST --------------------------
 nexttile %subplot(4,3,3)
@@ -84,7 +84,7 @@ plot(mo,Ot,'LineWidth',1.5); hold on;
 title('SST (^oC)')
 ylabel('Global')
 xlim([1 12])
-text(1,16.5,'C','FontWeight','Bold','FontSize',14)
+text(1,16.5,'c','FontWeight','Bold','FontSize',14)
 
 nexttile %(4,3,4)
 plot(mo,Czlc,'LineWidth',1.5); hold on;

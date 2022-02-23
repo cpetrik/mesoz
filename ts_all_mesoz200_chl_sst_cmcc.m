@@ -112,7 +112,7 @@ plot(yr,100*(Izm-Izm(yid))/Izm(yid),'LineWidth',1.5); hold on;
 plot(yr,100*(Uzm-Uzm(yid))/Uzm(yid),'LineWidth',1.5); hold on;
 title('% \Delta Mesozoo')
 ylabel('Percent change')
-text(1965,12,'A','FontWeight','Bold','FontSize',14)
+text(1965,12,'a','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 
 subplot(2,3,2)
@@ -124,7 +124,7 @@ plot(yr,100*(Ichl-Ichl(yid))/Ichl(yid),'LineWidth',1.5); hold on;
 plot(yr,100*(Uchl-Uchl(yid))/Uchl(yid),'LineWidth',1.5); hold on;
 title('% \Delta Surf Chl')
 ylabel('Percent change')
-text(1965,45,'B','FontWeight','Bold','FontSize',14)
+text(1965,45,'b','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 
 % Change from 1965
@@ -137,7 +137,7 @@ plot(yr,Isst-Isst(yid),'LineWidth',1.5); hold on;
 plot(yr,Usst-Usst(yid),'LineWidth',1.5); hold on;
 title('\Delta SST')
 ylabel('Change (^oC)')
-text(1965,6.4,'C','FontWeight','Bold','FontSize',14)
+text(1965,6.4,'c','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 legend({'CAN','CMCC','CNRM','GFDL','IPSL','UK'})
 legend('location','northwest')
@@ -152,7 +152,7 @@ plot(yr,Izm,'LineWidth',1.5); hold on;
 plot(yr,Uzm,'LineWidth',1.5); hold on;
 title('Mesozoo')
 ylabel('Biomass (mgC m^-^2)')
-text(1965,1080,'D','FontWeight','Bold','FontSize',14)
+text(1965,1080,'d','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 
 subplot(2,3,5)
@@ -165,7 +165,7 @@ plot(yr,Uchl*1e3,'LineWidth',1.5); hold on;
 title('Surf Chl')
 ylabel('Concentration (mg m-3)')
 xlim([1965 2100])
-text(1965,0.425,'E','FontWeight','Bold','FontSize',14)
+text(1965,0.425,'e','FontWeight','Bold','FontSize',14)
 
 subplot(2,3,6)
 plot(Cyr,Csst,'LineWidth',1.5); hold on;
@@ -176,7 +176,7 @@ plot(yr,Isst,'LineWidth',1.5); hold on;
 plot(yr,Usst,'LineWidth',1.5); hold on;
 title('SST')
 ylabel('^oC')
-text(1965,19,'F','FontWeight','Bold','FontSize',14)
+text(1965,19,'f','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 print('-dpng',[ppath 'Pdiff_Raw_hist_ssp585_tsmeans_zmeso200_schl_sst_cb_ms.png'])
 
@@ -193,7 +193,7 @@ plot(yr,100*(Izm-Izm(yid))/Izm(yid),'LineWidth',1.5); hold on;
 plot(yr,100*(Uzm-Uzm(yid))/Uzm(yid),'LineWidth',1.5); hold on;
 title('% \Delta Mesozoo')
 ylabel('Percent change')
-text(1965,12,'A','FontWeight','Bold','FontSize',14)
+text(1965,12,'a','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 
 subplot(2,3,2)
@@ -205,7 +205,7 @@ plot(yr,100*(Ichl-Ichl(yid))/Ichl(yid),'LineWidth',1.5); hold on;
 plot(yr,100*(Uchl-Uchl(yid))/Uchl(yid),'LineWidth',1.5); hold on;
 title('% \Delta Surf Chl')
 ylabel('Percent change')
-text(1965,45,'B','FontWeight','Bold','FontSize',14)
+text(1965,45,'b','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 
 % Change from 1965
@@ -218,7 +218,7 @@ plot(yr,Isst-Isst(yid),'LineWidth',1.5); hold on;
 plot(yr,Usst-Usst(yid),'LineWidth',1.5); hold on;
 title('\Delta SST')
 ylabel('Change (^oC)')
-text(1965,6.4,'C','FontWeight','Bold','FontSize',14)
+text(1965,6.4,'c','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 legend({'CAN','CMCC','CNRM','GFDL','IPSL','UK'})
 legend('location','northwest')
@@ -233,7 +233,7 @@ plot(yr,log10(Izm),'LineWidth',1.5); hold on;
 plot(yr,log10(Uzm),'LineWidth',1.5); hold on;
 title('Mesozoo')
 ylabel('Biomass (log_1_0 mgC m^-^2)')
-text(1965,1080,'D','FontWeight','Bold','FontSize',14)
+text(1965,1080,'d','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 
 subplot(2,3,5)
@@ -246,7 +246,7 @@ plot(yr,log10(Uchl*1e3),'LineWidth',1.5); hold on;
 title('Surf Chl')
 ylabel('Concentration (log_1_0 mg m-3)')
 xlim([1965 2100])
-text(1965,0.425,'E','FontWeight','Bold','FontSize',14)
+text(1965,0.425,'e','FontWeight','Bold','FontSize',14)
 
 subplot(2,3,6)
 plot(Cyr,Csst,'LineWidth',1.5); hold on;
@@ -257,7 +257,7 @@ plot(yr,Isst,'LineWidth',1.5); hold on;
 plot(yr,Usst,'LineWidth',1.5); hold on;
 title('SST')
 ylabel('^oC')
-text(1965,19,'F','FontWeight','Bold','FontSize',14)
+text(1965,19,'f','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
 print('-dpng',[ppath 'Pdiff_log10_hist_ssp585_tsmeans_zmeso200_schl_sst_cb_ms.png'])
 

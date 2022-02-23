@@ -68,7 +68,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,mc_s)
 cmocean('balance')
 caxis([-1 1])
-text(-2.5,2.25,'A','FontWeight','bold','FontSize',14)
+text(-2.5,2.25,'a','FontWeight','bold','FontSize',14)
 text(0,2.2,'Historic corr','HorizontalAlignment','center','FontWeight','bold')
 text(-1.75,1.75,'CMCC','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -122,7 +122,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,pdiff_mc2)
 cmocean('balance')
 caxis([-100 100])
-text(-2.5,2.25,'B','FontWeight','bold','FontSize',14)
+text(-2.5,2.25,'b','FontWeight','bold','FontSize',14)
 text(0,2.2,'% \Delta chl','HorizontalAlignment','center','FontWeight','bold')
 text(-1.95,1.75,'CMCC','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -174,7 +174,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,pdiff_mz2)
 cmocean('balance')
 caxis([-100 100])
-text(-2.5,2.25,'C','FontWeight','bold','FontSize',14)
+text(-2.5,2.25,'c','FontWeight','bold','FontSize',14)
 text(0,2.2,'% \Delta mesoz','HorizontalAlignment','center','FontWeight','bold')
 text(-1.95,1.75,'CMCC','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -232,7 +232,7 @@ surfm(lat_corr,lon_corr,cc_s)
 cmocean('balance')
 caxis([-1 1])
 colorbar('Position',[0.01 0.45 0.3 0.025],'orientation','horizontal');
-text(-2.5,2.25,'A','FontWeight','bold','FontSize',14)
+text(-2.5,2.25,'a','FontWeight','bold','FontSize',14)
 text(0,1.75,'Historic corr','HorizontalAlignment','center','FontWeight','bold')
 %text(-1.75,1.75,'CAN','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -243,7 +243,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,pdiff_cc2)
 cmocean('balance')
 caxis([-100 100])
-text(-2.5,2.25,'B','FontWeight','bold','FontSize',14)
+text(-2.5,2.25,'b','FontWeight','bold','FontSize',14)
 text(0,1.75,'% \Delta chl','HorizontalAlignment','center','FontWeight','bold')
 %text(0.2,1.65,'CAN','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -254,7 +254,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,pdiff_cz2)
 cmocean('balance')
 caxis([-100 100])
-text(-2.5,2.25,'C','FontWeight','bold','FontSize',14)
+text(-2.5,2.25,'c','FontWeight','bold','FontSize',14)
 text(0,1.75,'% \Delta mesoz','HorizontalAlignment','center','FontWeight','bold')
 %text(0.2,1.65,'CAN','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);

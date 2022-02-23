@@ -145,7 +145,7 @@ png(paste0(figp,'Heatmaps_urmse_clims_200_obsglm100_raw_neg11_4rt.png'),
 plot_grid( fr,zr,frm,zrm,frb,zrb,
            nrow = 3, ncol = 2,
            rel_widths = c(1,1), rel_heights = c(1,1) ,
-           align = 'h' , labels = "AUTO", label_size = 12, hjust = -4)
+           align = 'h' , labels = "auto", label_size = 12, hjust = -4)
 dev.off()
 
 
