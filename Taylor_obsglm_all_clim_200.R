@@ -20,12 +20,13 @@ setwd("/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_mat
 figp <- "/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_figs/"
 
 # load data
-Tr <- read.csv("skill_model_obsglm_all_clim_200.csv",sep=",",header = T,stringsAsFactors = F)
+ddir <- "/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/"
+Tr <- read.csv(paste0(ddir,"skill_model_obsglm_all_clim_200.csv"),sep=",",header = T,stringsAsFactors = F)
 
 #----------------------------- Diff Data Scaling ------------------------------------------------
 ### Standardization 
 #1st take log
-Tr[,3:8] <- log(Tr[,3:8] + 1e-16)
+Tr[,3:8] <- log10(Tr[,3:8] + 1)
 Tr2 <- Tr[,3:8]
 
 # z-score standardize

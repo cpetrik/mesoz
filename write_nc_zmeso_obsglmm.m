@@ -24,9 +24,10 @@ lon = lon_g(:,1);
 glmz_mo(isnan(glmz_mo(:))) = 1e20;
 
 %% defs
-gpath = '/Volumes/MIP/Fish-MIP/CMIP6/GFDL/hist/';
-load([gpath 'gfdl_hist_zmeso200_onedeg_climatol_1965_2014.mat'],...
-    'units_vint','long_name','standard_name');
+%gpath = '/Volumes/MIP/Fish-MIP/CMIP6/GFDL/hist/';
+% gpath = '/Volumes/petrik-lab/Feisty/Fish-MIP/CMIP6/GFDL/hist/';
+% load([gpath 'gfdl_hist_zmeso200_onedeg_climatol_1965_2014.mat'],...
+%     'units_vint','long_name','standard_name');
 
 %% file
 file_ischl = [opath 'obsglmm_zmeso_vint_200m_monthly_climatology.nc'];
@@ -56,9 +57,9 @@ netcdf.putAtt(ncidZM,vidtZM,'units','month');
 netcdf.putAtt(ncidZM,vidtZM,'axis','T');
 
 vidbioZM = netcdf.defVar(ncidZM,'zmeso200','double',[lon_dim,lat_dim,time_dim]);
-netcdf.putAtt(ncidZM,vidbioZM,'long_name',long_name);
-netcdf.putAtt(ncidZM,vidbioZM,'standard_name',standard_name);
-netcdf.putAtt(ncidZM,vidbioZM,'units',units_vint);
+netcdf.putAtt(ncidZM,vidbioZM,'long_name','Concentration of Mesozooplankton integrated over top 200m');
+netcdf.putAtt(ncidZM,vidbioZM,'standard_name','concentration_of_mesozooplankton_200m_int');
+netcdf.putAtt(ncidZM,vidbioZM,'units','mgC m-2');
 netcdf.defVarFill(ncidZM,vidbioZM,false,1e20);
 
 varid = netcdf.getConstant('GLOBAL');
