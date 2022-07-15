@@ -12,6 +12,13 @@ load([fpath 'StrombergQTR-m00_int200_mgCm2.mat']);
 
 szmo_all = zmo_all;
 
+%% climatologies
+strom_DJF = nanmean(glmz_mo(:,:,[1 2 12]),3);
+strom_MAM = nanmean(glmz_mo(:,:,3:5),3);
+strom_JJA = nanmean(glmz_mo(:,:,6:8),3);
+strom_SON = nanmean(glmz_mo(:,:,9:11),3);
+strom_all = nanmean(glmz_mo,3);
+
 clear lat lon
 
 %% Biomes
@@ -72,4 +79,3 @@ writetable(obsmod,'skill_hist_Stromberg_all_clim_200.csv')
 %%
 strom_comb = comb;
 save('skill_hist_model_obsglm100_climatols.mat','strom_comb','-append')
-

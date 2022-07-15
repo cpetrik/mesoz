@@ -1,4 +1,4 @@
-% CMIP6 output 
+% CMIP6 output
 % mesoz 200m integrations
 % Map ESM future diffs 50-yr means
 % And correlation mesoz-chl Hist 50-yr
@@ -14,7 +14,7 @@ load('cmip6_hist_ssp585_space_means_50yr_zmeso200_schl_sst_same_orientation.mat'
 load('cmip6_hist_ssp585_corr_50yr_zmeso200_schl_sst_same_orientation',...
     'cc_s','mc_s','nc_s','gc_s','ic_s','uc_s','lat_corr','lon_corr')
 
-%% Diffs 
+%% Diffs
 diff_ct = FCsst50 - HCsst50;
 diff_nt = FNsst50 - HNsst50;
 diff_gt = FGsst50 - HGsst50;
@@ -175,7 +175,7 @@ surfm(lat_s,lon_s,pdiff_mz2)
 cmocean('balance')
 caxis([-100 100])
 text(-2.5,2.25,'c','FontWeight','bold','FontSize',14)
-text(0,2.2,'% \Delta mesoz','HorizontalAlignment','center','FontWeight','bold')
+text(0,2.2,'% \Delta zmeso','HorizontalAlignment','center','FontWeight','bold')
 text(-1.95,1.75,'CMCC','HorizontalAlignment','center')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 
@@ -255,9 +255,8 @@ surfm(lat_s,lon_s,pdiff_cz2)
 cmocean('balance')
 caxis([-100 100])
 text(-2.5,2.25,'c','FontWeight','bold','FontSize',14)
-text(0,1.75,'% \Delta mesoz','HorizontalAlignment','center','FontWeight','bold')
+text(0,1.75,'% \Delta zmeso','HorizontalAlignment','center','FontWeight','bold')
 %text(0.2,1.65,'CAN','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 colorbar('Position',[0.475 0.45 0.3 0.025],'orientation','horizontal');
 print('-dpng',[ppath 'Map_chl_zmeso_corr_pdiff_Hist_SSP585_50s_CANonly.png'])
-

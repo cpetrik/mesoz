@@ -28,8 +28,8 @@ library(reshape2)
 # load data
 ddir <- "/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/"
 frval <- read.csv(paste0(ddir,"corr_hist_clims_200_obsglm100_log10_KK_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
-kval <- read.csv(paste0(ddir,"Kendall_corr_hist_clims_200_obsglm100_log10_KK_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
-sval <- read.csv(paste0(ddir,"Spearman_corr_hist_clims_200_obsglm100_log10_KK_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
+kval <- read.csv(paste0(ddir,"Kendall_corr_hist_clims_200_obsglm100_log10_KK_1e3_v2.csv"),sep=",",header = T,stringsAsFactors = F)
+sval <- read.csv(paste0(ddir,"Spearman_corr_hist_clims_200_obsglm100_log10_KK_1e3_v2.csv"),sep=",",header = T,stringsAsFactors = F)
 frms <- read.csv(paste0(ddir,"urmse_hist_clims_200_obsglm100_log10_KK_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
 fbia <- read.csv(paste0(ddir,"bias_hist_clims_200_obsglm100_log10_KK_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
 fmae <- read.csv(paste0(ddir,"mae_hist_clims_200_obsglm100_log10_KK_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
@@ -134,18 +134,7 @@ fae <- ggplot(data = fmae3, aes(y=Model, x=Season, fill=MAE)) +
 ### ---------------------------- Together -----------------------
 library(cowplot) #plot_grid
 
-png(paste0(figp,'Heatmaps_urmse_Kcorr_clims_200_obsglm100_log10_KK_1e3.png'), 
-    width = 4*300,        # 5 x 300 pixels
-    height = 9*300,
-    res = 300,            # 300 pixels per inch
-    pointsize = 8)
-plot_grid( frk,frm,frb,
-           nrow = 3, ncol = 1,
-           rel_widths = c(1,1), rel_heights = c(1,1) ,
-           align = 'h' , labels = "auto", label_size = 12, hjust = -4)
-dev.off()
-
-png(paste0(figp,'Heatmaps_mae_Kcorr_clims_200_obsglm100_log10_KK_1e3.png'), 
+png(paste0(figp,'Heatmaps_mae_Kcorr_clims_200_obsglm100_log10_KK_1e3_v2.png'), 
     width = 4*300,        # 5 x 300 pixels
     height = 9*300,
     res = 300,            # 300 pixels per inch
@@ -156,7 +145,7 @@ plot_grid( frk,fae,frb,
            align = 'h' , labels = "auto", label_size = 12, hjust = -4)
 dev.off()
 
-png(paste0(figp,'Heatmaps_mae_Scorr_clims_200_obsglm100_log10_KK_1e3.png'), 
+png(paste0(figp,'Heatmaps_mae_Scorr_clims_200_obsglm100_log10_KK_1e3_v2.png'), 
     width = 4*300,        # 5 x 300 pixels
     height = 9*300,
     res = 300,            # 300 pixels per inch
@@ -167,7 +156,7 @@ plot_grid( frs,fae,frb,
            align = 'h' , labels = "auto", label_size = 12, hjust = -4)
 dev.off()
 
-png(paste0(figp,'Heatmaps_mae_Pcorr_clims_200_obsglm100_log10_KK_1e3.png'), 
+png(paste0(figp,'Heatmaps_mae_Pcorr_clims_200_obsglm100_log10_KK_1e3_v2.png'), 
     width = 4*300,        # 5 x 300 pixels
     height = 9*300,
     res = 300,            # 300 pixels per inch

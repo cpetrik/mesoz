@@ -7,10 +7,10 @@ close all
 
 sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
 
-load([sfile 'skill_scores_hist_model_obsglm100_clim_log10_KK.mat'])
+load([sfile 'skill_scores_hist_model_obsglm100_clim_log10_KK_1e4.mat'])
 
 %dim 1: metrics
-%dim 2: model 
+%dim 2: model
 %dim 3: season
 
 figp ='/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_figs/';
@@ -72,11 +72,11 @@ rhoS=skill(6,2:7,5);
 
 xc = 1; yc = 0;
 th = linspace(0,2*pi,50);
-r = 3:3:20;
+r = 2:2:20;
 rN = 1:20;
 rP = 1:6; %0.5:0.5:6;
 
-%% 
+%%
 %pp(ii)=polar(theta(ii),rho(ii));
 
 % plotting points in non-polar?
@@ -101,11 +101,10 @@ end
 
 %%
 f1 = figure('Units','inches','Position',[1 1 8 6]);
-%subplot('position',[0.1 0.15 0.8 0.8])
+subplot('position',[0.1 0.15 0.8 0.8])
 
-t = tiledlayout(2,1);
-%subplot(2,2,1)
-nexttile
+%t = tiledlayout(2,1);
+%nexttile
 %plot obs
 h2=polarplot(tr,rr,'k*'); hold on;
 set(h2,'MarkerSize',10);
@@ -131,15 +130,16 @@ end
 lgd = legend(atex,'Location','southoutside','NumColumns',2);
 lgd.AutoUpdate = 'off';
 %plot RMSE circles
-for i = 1:length(r)
+for i = 1:3%length(r)
     [x,y] = pol2cart(th,r(i));
     [th1, r1] = cart2pol( x+xc, y+yc );
     hR=polarplot(th1, r1); hold on;
     %set(hR,'linestyle','--','color',[238/255 119/255 51/255]);
     set(hR,'linestyle','--','color',[0.7 0.7 0.7]);
-    if (rem(i,2)==0)
-        text(th1(22),r1(22),num2str(r(i)),'color',[0.7 0.7 0.7]);
-    end
+    %if (rem(i,2)==0)
+        %text(th1(22),r1(22),num2str(r(i)),'color',[0.7 0.7 0.7]);
+        text(th1(8),r1(8),num2str(r(i)),'color',[0.7 0.7 0.7]);
+    %end
 end
 %add all other data
 for s=1:6
@@ -157,56 +157,10 @@ end
 %relabel angles to match corr coeff
 set(gca,'ThetaTick',(90/1.5708)*thetaTickN,'ThetaTickLabel',...
     {'0.9','0.6','0.3','0','-0.3','-0.6','-0.9'})
-axis([0 180 0 15])
-text(-0.25,8,'Standard deviation','HorizontalAlignment','center')
-text(1.15,17.25,'Correlation coeff')
-text(0.8,15.75,{'Root mean','square error'},'color',[0.5 0.5 0.5])
-text(2.275,21.5,'a','FontWeight','Bold','FontSize',14)
+axis([0 180 0 8])
+text(-0.15,4,'Standard deviation','HorizontalAlignment','center')
+text(1.215,8.45,'Correlation coeff')
+text(0.8,8.5,{'Root mean','square error'},'color',[0.5 0.5 0.5])
+%text(2.275,3.5,'a','FontWeight','Bold','FontSize',14)
 
-%%
-nexttile
-h2=polarplot(tr,rr,'k*'); hold on;
-set(h2,'MarkerSize',10);
-for i = 1:5%length(rP)
-    [x,y] = pol2cart(th,rP(i));
-    [th1, r1] = cart2pol( x+xc, y+yc );
-    hR=polarplot(th1, r1); hold on
-    %set(hR,'linestyle','--','color',[238/255 119/255 51/255]);
-    set(hR,'linestyle','--','color',[0.7 0.7 0.7]);
-    text(th1(22),r1(22),num2str(rP(i)),'color',[0.7 0.7 0.7]);
-end
-for s=1:6
-    hA=polarplot(thetaA(s),rhoA(s),'o'); hold on;
-    set(hA,'color','k','MarkerFaceColor',cb(s,:),'MarkerSize',8);
-    hD=polarplot(thetaD(s),rhoD(s),'d'); hold on;
-    set(hD,'color','k','MarkerFaceColor',cb(s,:),'MarkerSize',8);
-    hM=polarplot(thetaM(s),rhoM(s),'^'); hold on;
-    set(hM,'color','k','MarkerFaceColor',cb(s,:),'MarkerSize',8);
-    hJ=polarplot(thetaJ(s),rhoJ(s),'s'); hold on;
-    set(hJ,'color','k','MarkerFaceColor',cb(s,:),'MarkerSize',8);
-    hS=polarplot(thetaS(s),rhoS(s),'v'); hold on;
-    set(hS,'color','k','MarkerFaceColor',cb(s,:),'MarkerSize',8);
-end
-set(gca,'ThetaTick',(90/1.5708)*thetaTickN,'ThetaTickLabel',...
-    {'0.9','0.6','0.3','0','-0.3','-0.6','-0.9'})
-% axis([0 180 0 1.5])
-% text(-0.175,0.75,'Standard deviation','HorizontalAlignment','center')
-% text(1.2,1.60,'Correlation coeff')
-% text(0.8,1.55,{'Root mean','square error'},'color',[0.5 0.5 0.5])
-% text(2.2,2.05,'b','FontWeight','Bold','FontSize',14)
-axis([0 180 0 5])
-text(-0.25,3.0,'Standard deviation','HorizontalAlignment','center')
-text(1.15,5.75,'Correlation coeff')
-text(0.8,5.75,{'Root mean','square error'},'color',[0.5 0.5 0.5])
-%title('log_1_0')
-text(2.275,6.75,'b','FontWeight','Bold','FontSize',14)
-
-t.Padding = 'compact';
-t.TileSpacing = 'compact';
-
-print('-dpng',[figp 'Taylor_all_clim_together_obsglm_log10_ms_KK.png'])
-
-
-
-
-
+print('-dpng',[figp 'Taylor_all_clim_together_obsglm_log10_ms_KK_1e4.png'])

@@ -12,11 +12,11 @@ sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_st
 
 %% No Standardization
 % log10
-Acomb = log10(comb(:,3:9)+1);
-Dcomb = log10(dcomb(:,3:9)+1);
-Jcomb = log10(jcomb(:,3:9)+1);
-Mcomb = log10(mcomb(:,3:9)+1);
-Scomb = log10(scomb(:,3:9)+1);
+Acomb = log10(comb(:,3:9)+1e-6);
+Dcomb = log10(dcomb(:,3:9)+1e-6);
+Jcomb = log10(jcomb(:,3:9)+1e-6);
+Mcomb = log10(mcomb(:,3:9)+1e-6);
+Scomb = log10(scomb(:,3:9)+1e-6);
 
 %% Skill metric = weighted sum of squares for multivariate
 metrics={'ccoef','crmsd','sdev'};

@@ -7,21 +7,23 @@ clear all
 close all
 
 %%
-load('skill_hist_model_obsglm100_climatols.mat')
+load('skill_hist_model_copepod_climatols_seasons.mat')
 
 sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
 
 %% Standardization
-% use quantiles to determine what value to change zeros?
-quantile(comb(:,3:9),[0.01 0.05])
-% limit of observing capabilities
+test1 = comb(:,9);
+test2 = [dcomb(:,9),jcomb(:,9),mcomb(:,9),scomb(:,9)];
+m1=min(test1);
+m2=min(test2(:));
+cmin=min(m1,m2)
 
-%% log10
-Acomb = log10(comb(:,3:9)+1e-9);
-Dcomb = log10(dcomb(:,3:9)+1e-9);
-Jcomb = log10(jcomb(:,3:9)+1e-9);
-Mcomb = log10(mcomb(:,3:9)+1e-9);
-Scomb = log10(scomb(:,3:9)+1e-9);
+% log10
+Acomb = log10(comb(:,3:9)+1e-4);
+Dcomb = log10(dcomb(:,3:9)+1e-4);
+Jcomb = log10(jcomb(:,3:9)+1e-4);
+Mcomb = log10(mcomb(:,3:9)+1e-4);
+Scomb = log10(scomb(:,3:9)+1e-4);
 
 %% Skill metric = weighted sum of squares for multivariate
 metrics={'std','r','RMSD','CRMSD','bias','stdnorm','rmsdnorm','crmsdnorm',...
@@ -50,30 +52,33 @@ metrics=metrics';
 %                   observations, 1 = perfect, 0 = same as averaging obs,
 %                   <1 = worse than just averaging observations)
 
+% These need to be run one at a time because models have nans in different
+% places - NOT THE ISSUE - needed to recalc # obs after removing nans
+
 Amod_all = Acomb;
 o=(Amod_all(:,7));
 m=(Amod_all(:,1:6));
-A = skillstats(o, m);
+A = skillstats2(o, m);
 
 Dmod_all = Dcomb;
 o=(Dmod_all(:,7));
 m=(Dmod_all(:,1:6));
-D = skillstats(o, m);
+D = skillstats2(o, m);
 
 Mmod_all = Mcomb;
 o=(Mmod_all(:,7));
 m=(Mmod_all(:,1:6));
-M = skillstats(o, m);
+M = skillstats2(o, m);
 
 Jmod_all = Jcomb;
 o=(Jmod_all(:,7));
 m=(Jmod_all(:,1:6));
-J = skillstats(o, m);
+J = skillstats2(o, m);
 
 Smod_all = Scomb;
 o=(Smod_all(:,7));
 m=(Smod_all(:,1:6));
-S = skillstats(o, m);
+S = skillstats2(o, m);
 
 %%
 skill=NaN*ones(11,7,5);
@@ -86,7 +91,7 @@ skill(6,:,1) = A.stdnorm;
 skill(7,:,1) = A.rmsdnorm;
 skill(8,:,1) = A.crmsdnorm;
 skill(9,:,1) = A.aae;
-skill(10,:,1) = A.ri;
+skill(10,:,1) = real(A.ri);
 skill(11,:,1) = A.mef;
 
 skill(1,:,2) = D.std;
@@ -98,7 +103,7 @@ skill(6,:,2) = D.stdnorm;
 skill(7,:,2) = D.rmsdnorm;
 skill(8,:,2) = D.crmsdnorm;
 skill(9,:,2) = D.aae;
-skill(10,:,2) = D.ri;
+skill(10,:,2) = real(D.ri);
 skill(11,:,2) = D.mef;
 
 skill(1,:,3) = M.std;
@@ -110,7 +115,7 @@ skill(6,:,3) = M.stdnorm;
 skill(7,:,3) = M.rmsdnorm;
 skill(8,:,3) = M.crmsdnorm;
 skill(9,:,3) = M.aae;
-skill(10,:,3) = M.ri;
+skill(10,:,3) = real(M.ri);
 skill(11,:,3) = M.mef;
 
 skill(1,:,4) = J.std;
@@ -122,7 +127,7 @@ skill(6,:,4) = J.stdnorm;
 skill(7,:,4) = J.rmsdnorm;
 skill(8,:,4) = J.crmsdnorm;
 skill(9,:,4) = J.aae;
-skill(10,:,4) = J.ri;
+skill(10,:,4) = real(J.ri);
 skill(11,:,4) = J.mef;
 
 skill(1,:,5) = S.std;
@@ -134,8 +139,42 @@ skill(6,:,5) = S.stdnorm;
 skill(7,:,5) = S.rmsdnorm;
 skill(8,:,5) = S.crmsdnorm;
 skill(9,:,5) = S.aae;
-skill(10,:,5) = S.ri;
+skill(10,:,5) = real(S.ri);
 skill(11,:,5) = S.mef;
+
+% skill=NaN*ones(11,6,5);
+% for j=1:5
+%     for k=1:6
+%         % Pick
+%         if j==1
+%             mod_all = Acomb;
+%         elseif j==2
+%             mod_all = Dcomb;
+%         elseif j==3
+%             mod_all = Mcomb;
+%         elseif j==4
+%             mod_all = Jcomb;
+%         else
+%             mod_all = Scomb;
+%         end
+%         
+%         o=(mod_all(:,7));
+%         m=(mod_all(:,k));
+%         S = skillstats2(o, m);
+%         
+%         skill(1,k,j) = S.std(2);
+%         skill(2,k,j) = S.cor(2);
+%         skill(3,k,j) = S.rmsd(2);
+%         skill(4,k,j) = S.crmsd(2);
+%         skill(5,k,j) = S.bias(2);
+%         skill(6,k,j) = S.stdnorm(2);
+%         skill(7,k,j) = S.rmsdnorm(2);
+%         skill(8,k,j) = S.crmsdnorm(2);
+%         skill(9,k,j) = S.aae(2);
+%         skill(10,k,j) = real(S.ri(2));
+%         skill(11,k,j) = S.mef(2);
+%     end
+% end
 
 %% Results
 figp ='/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_figs/';
@@ -147,11 +186,11 @@ cm=[0 0.7 0;...   %g
     0.35 0.35 0.35]; %grey
 % set(groot,'defaultAxesColorOrder',cm);
 
-simtext = {'obsGLMM','CAN','CMCC','CNRM','GFDL','IPSL','UK'};
+simtext = {'obsCOPE','CAN','CMCC','CNRM','GFDL','IPSL','UK'};
 simtex = {'CA','CM','CN','GF','IP','UK'};
 ctext = {'All','Winter','Spring','Summer','Fall'};
 
-save([sfile 'skill_scores_hist_model_obsglm100_clim_log10_KK.mat'],'skill',...
+save([sfile 'skill_scores_hist_model_copepod_clim_log10_KK_1e4.mat'],'skill',...
     'simtext','metrics','ctext')
 
 %% Tables
@@ -173,12 +212,12 @@ Tmae = array2table(tmae,'RowNames',simtext,'VariableNames',ctext);
 bias = squeeze(skill(5,:,:));
 Tbias = array2table(bias,'RowNames',simtext,'VariableNames',ctext);
 
-writetable(Tcorr,[sfile 'corr_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Trmse,[sfile 'rmse_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Tnstd,[sfile 'nstd_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Turmse,[sfile 'urmse_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Tmae,[sfile 'mae_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Tbias,[sfile 'bias_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
+writetable(Tcorr,[sfile 'corr_hist_clims_200_copepod_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Trmse,[sfile 'rmse_hist_clims_200_copepod_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Tnstd,[sfile 'nstd_hist_clims_200_copepod_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Turmse,[sfile 'urmse_hist_clims_200_copepod_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Tmae,[sfile 'mae_hist_clims_200_copepod_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Tbias,[sfile 'bias_hist_clims_200_copepod_log10_KK_1e4.csv'],'WriteRowNames',true);
 
 %% make data vecs into tables to also calc stats in R
 
@@ -188,9 +227,8 @@ TJcomb = array2table(Jcomb,'VariableNames',simtext);
 TMcomb = array2table(Mcomb,'VariableNames',simtext);
 TScomb = array2table(Scomb,'VariableNames',simtext);
 
-writetable(TAcomb,[sfile 'climatol_All_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TDcomb,[sfile 'climatol_DJF_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TJcomb,[sfile 'climatol_JJA_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TMcomb,[sfile 'climatol_MAM_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TScomb,[sfile 'climatol_SON_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-
+writetable(TAcomb,[sfile 'climatol_All_hist_clims_200_copepod_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TDcomb,[sfile 'climatol_DJF_hist_clims_200_copepod_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TJcomb,[sfile 'climatol_JJA_hist_clims_200_copepod_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TMcomb,[sfile 'climatol_MAM_hist_clims_200_copepod_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TScomb,[sfile 'climatol_SON_hist_clims_200_copepod_log10_1e4.csv'],'WriteRowNames',false);

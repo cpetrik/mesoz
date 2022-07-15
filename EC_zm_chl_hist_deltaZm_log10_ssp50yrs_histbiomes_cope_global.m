@@ -1,4 +1,4 @@
-% Linear regressions of zmeso biomass with surf chl 
+% Linear regressions of zmeso biomass with surf chl
 % Annual climatology, biomes and global
 % Historic and SSP585
 % GLMM100, Stromberg, COPEPOD obs
@@ -12,7 +12,7 @@ figp ='/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_fig
 load('delta_log10_means_areaw_hist_ssp585_50yr_zmeso200_histbiomes.mat');
 
 %biomass was on log10 scale before taking difference
-log_diff = (zmeans_diff); 
+log_diff = (zmeans_diff);
 
 %% Zmeso-chl relationships
 load('Hist_SSP585_coeffs_log10_chl_global_biomes.mat');
@@ -171,7 +171,7 @@ xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
 xlabel('log_1_0 chl (mg m^-^3)')
 %title('Historic relationship')
-lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCS','obsCM'}); 
+lg  = legend({'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCS','obsCM'});
 lg.Position(1:2) = [.82 .63];
 lg.AutoUpdate = 'off';
 text(-2,2.4,'a','FontWeight','Bold','FontSize',14)
@@ -197,7 +197,7 @@ plot(Myr,mF,'-.k','LineWidth',1.5); hold on;
 plot(Myr,mE,'k','LineWidth',1.5); hold on;
 fill(X,FCI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on;
 fill(X,ECI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on;
-ylabel('% \Delta Mesozoo')
+ylabel('% \Delta zmeso')
 xlabel('Year')
 text(1965,6.5,'c','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
@@ -208,7 +208,7 @@ legend('location','southwest')
 subplot('Position',[0.5 0.1 0.3 0.35])
 plot(pc,Fpdf_norm,'-.k','LineWidth',2); hold on;
 plot(pc,Epdf_norm,'k','LineWidth',2); hold on;
-xlabel('% \Delta Mesozoo')
+xlabel('% \Delta zmeso')
 ylabel('Probability density')
 xlim([-30 16])
 text(-29.5,0.084,'d','FontWeight','Bold','FontSize',14)
@@ -227,7 +227,7 @@ xlim([round(cmin) round(cmax)])
 ylabel({'Global','log_1_0 zmeso'})
 xlabel('log_1_0 chl (mg m^-^3)')
 %title('Historic relationship')
-lg  = legend({'CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCS','obsCM'}); 
+lg  = legend({'CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCS','obsCM'});
 lg.Position(1:2) = [.82 .63];
 lg.AutoUpdate = 'off';
 text(-2,2.2,'a','FontWeight','Bold','FontSize',14)
@@ -253,7 +253,7 @@ plot(Myr,mF,'-.k','LineWidth',1.5); hold on;
 plot(Myr,mE,'k','LineWidth',1.5); hold on;
 fill(X,FCI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on;
 fill(X,ECI,'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on;
-ylabel('% \Delta Mesozoo')
+ylabel('% \Delta zmeso')
 xlabel('Year')
 text(1965,6.5,'c','FontWeight','Bold','FontSize',14)
 xlim([1965 2100])
@@ -264,11 +264,9 @@ legend('location','southwest')
 subplot('Position',[0.5 0.1 0.3 0.35])
 plot(pc,Fpdf_norm,'-.k','LineWidth',2); hold on;
 plot(pc,Epdf_norm,'k','LineWidth',2); hold on;
-xlabel('% \Delta Mesozoo')
+xlabel('% \Delta zmeso')
 ylabel('Probability density')
 xlim([-30 16])
 text(-29.5,0.084,'d','FontWeight','Bold','FontSize',14)
 
 print('-dpng',[figp 'Hist_lm_SSP585_delta_log10_EC_global_cope_ms_noCAN.png'])
-
-

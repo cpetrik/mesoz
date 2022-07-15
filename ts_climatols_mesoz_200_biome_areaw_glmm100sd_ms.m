@@ -1,4 +1,4 @@
-% CMIP6 output 
+% CMIP6 output
 % 200m integrations
 % Area-weighted
 
@@ -12,7 +12,7 @@ load('Hist_ts_sst_clim_biomes_areaw.mat')
 load('Hist_ts_mesoz_clim_biomes_areaw.mat')
 load('glm100_output_by_biom_v2.mat')
 
-%% Plots 
+%% Plots
 
 cb=[34/255 136/255 51/255;...   %green
     %238/255 119/255 51/255;...  %orange
@@ -30,10 +30,10 @@ set(groot,'defaultAxesColorOrder',cb);
 %create continuous x value array for plotting
 mo = 1:12;
 
-X=[mo fliplr(mo)]; 
+X=[mo fliplr(mo)];
 %create y values for out and then back
 %+/- 2 stdev
-Sz=[OGmzmean+2*OGmzsd; flipud(OGmzmean-2*OGmzsd)]; 
+Sz=[OGmzmean+2*OGmzsd; flipud(OGmzmean-2*OGmzsd)];
 
 %% Try using tiles
 close all
@@ -52,7 +52,7 @@ plot(mo,Uz,'LineWidth',1.5); hold on;
 %plot(mo,Oz,'LineWidth',1.5); hold on;
 plot(mo,OGmzmean(:,1),'LineWidth',1.5); hold on;
 fill(X,Sz(:,1),'k','FaceAlpha',0.25,'EdgeAlpha',0.25); hold on; %plot filled area
-title('mesozoo (mgC m^-^2)')
+title('zmeso (mgC m^-^2)')
 ylabel('Global')
 xlim([1 12])
 ylim([0 1500])
@@ -210,7 +210,7 @@ plot(mo,Gz,'LineWidth',1.5); hold on;
 plot(mo,Iz,'LineWidth',1.5); hold on;
 plot(mo,Uz,'LineWidth',1.5); hold on;
 plot(mo,Oz,'LineWidth',1.5); hold on;
-title('mesozoo (mgC m^-^2)')
+title('zmeso (mgC m^-^2)')
 ylabel('Global')
 xlim([1 12])
 
@@ -335,10 +335,3 @@ xlim([1 12])
 lg = legend(nexttile(1),{'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM'});
 lg.Location = 'westoutside';
 print('-dpng',[ppath 'Hist_clim_biome_areaw_means_zmeso200_schl_sst_glmm100SDs_noOBS.png'])
-
-
-
-
-
-
-

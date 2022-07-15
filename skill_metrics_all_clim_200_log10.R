@@ -1,5 +1,5 @@
 # Calculate different skill metrics for each ESM
-# log transformed biomass
+# log10 transformed biomass
 
 rm(list=ls())
 
@@ -21,11 +21,11 @@ figp <- "/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_f
 
 # load data
 ddir <- "/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/"
-Amod <- read.csv(paste0(ddir,"climatol_All_hist_clims_200_obsglm100_log10.csv"),sep=",",header = T,stringsAsFactors = F)
-Dmod <- read.csv(paste0(ddir,"climatol_DJF_hist_clims_200_obsglm100_log10.csv"),sep=",",header = T,stringsAsFactors = F)
-Mmod <- read.csv(paste0(ddir,"climatol_MAM_hist_clims_200_obsglm100_log10.csv"),sep=",",header = T,stringsAsFactors = F)
-Jmod <- read.csv(paste0(ddir,"climatol_JJA_hist_clims_200_obsglm100_log10.csv"),sep=",",header = T,stringsAsFactors = F)
-Smod <- read.csv(paste0(ddir,"climatol_SON_hist_clims_200_obsglm100_log10.csv"),sep=",",header = T,stringsAsFactors = F)
+Amod <- read.csv(paste0(ddir,"climatol_All_hist_clims_200_obsglm100_log10_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
+Dmod <- read.csv(paste0(ddir,"climatol_DJF_hist_clims_200_obsglm100_log10_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
+Mmod <- read.csv(paste0(ddir,"climatol_MAM_hist_clims_200_obsglm100_log10_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
+Jmod <- read.csv(paste0(ddir,"climatol_JJA_hist_clims_200_obsglm100_log10_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
+Smod <- read.csv(paste0(ddir,"climatol_SON_hist_clims_200_obsglm100_log10_1e3.csv"),sep=",",header = T,stringsAsFactors = F)
 
 
 
@@ -106,7 +106,7 @@ p5 <- ggplot(Tr2, aes(y=UK, x=obs)) + theme_bw(base_size=18) +
   annotate( geom = 'text', y = 0.3, x = 3.25, hjust = 0, label=paste0("r = ",signif(Rcorr_all_r[6,1],digits = 2)), size=5) +
   annotate( geom = 'text', y = 0.1, x = 3.25, hjust = 0, label=paste0("rmse = ",signif(RMSD[6,1],digits = 2)), size=5)
 
-pdf( file = 'corr_all_clim_200.pdf', width = unit( 10, 'cm' ), height = unit( 12, 'cm' ) )
+pdf( file = 'corr_all_clim_200_log10_1e3.pdf', width = unit( 10, 'cm' ), height = unit( 12, 'cm' ) )
 plot_grid( p1,p2,p3,p4,p5,
            nrow = 3, ncol = 2,
            rel_widths = c( 1, 1 ), rel_heights = c( 1, 1 ) ,
@@ -161,7 +161,7 @@ g5 <- ggplot(Tr3, aes(y=UK, x=obs)) + theme_bw(base_size=14) +
   annotate( geom = 'text', y = 3, x = 2e3, hjust = 0, label=paste0("r = ",signif(Rcorr_all_r[6,1],digits = 2)), size=5) +
   annotate( geom = 'text', y = 1.5, x = 2e3, hjust = 0, label=paste0("rmse = ",signif(RMSD[6,1],digits = 2)), size=5)
 
-pdf( file = 'corr_all_clim_200_log.pdf', width = unit( 10, 'cm' ), height = unit( 12, 'cm' ) )
+pdf( file = 'corr_all_clim_200_log10_1e3.pdf', width = unit( 10, 'cm' ), height = unit( 12, 'cm' ) )
 plot_grid( g1,g2,g3,g4,g5,
            nrow = 3, ncol = 2,
            rel_widths = c( 1, 1 ), rel_heights = c( 1, 1 ) ,

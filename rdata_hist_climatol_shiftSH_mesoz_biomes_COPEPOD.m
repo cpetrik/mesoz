@@ -13,17 +13,24 @@ load([Cdir 'GFDL/gridspec_gfdl_cmip6.mat'],'deptho','LAT','LON','lmask');
 load('copepod-2012_cmass_all_gridded.mat','lat_g','lon_g',...
     'zoo_g','fileid','units')
 
+%% climatologies
+cope_DJF = nanmean(zoo_g(:,:,[1 2 12]),3);
+cope_MAM = nanmean(zoo_g(:,:,3:5),3);
+cope_JJA = nanmean(zoo_g(:,:,6:8),3);
+cope_SON = nanmean(zoo_g(:,:,9:11),3);
+cope_all = nanmean(zoo_g,3);
+
 % %% GLOBCOLOR ---------------------------------------
 % % CHL
 % opath ='/Volumes/MIP/Obs_Data/Chl/';
 % load([opath 'globcolour_soblend_mc_x1.mat'])
-% 
+%
 % %% Reshape
 % [lat_c,lon_c] = meshgrid(lat,lon);
-% 
+%
 % % climatologies
 % schl_all = nanmean(chl,3);
-% 
+%
 % %% BIOME
 
 %% MODISAQUA
@@ -69,7 +76,7 @@ bpath2='/Volumes/MIP/Fish-MIP/CMIP6/biome_masks/';
 load([bpath2 'SeaWiFS_based_biomes_x1.mat']);
 [lat_sb,lon_sb] = meshgrid(lat,lon);
 
-clear lat lon 
+clear lat lon
 
 %% check orientations
 figure(1)
@@ -132,13 +139,13 @@ lat_mb = fliplr(lat_mb);
 % From mg m-3 to mg m-2 (integrate top 200m)
 dep200 = min(200,deptho);
 dep200(isnan(deptho(:))) = nan;
-zoo_200 = zoo_g .* dep200; 
+zoo_200 = zoo_g .* dep200;
 
 %% save same orientation
 save('space_means_copepod_zmeso200_chls_same_orientation.mat',...
     'zoo_200','schl_all','mchl_all','sbiomes','mbiomes','lat_sc','lon_sc');
 
-%% Vectorize, 
+%% Vectorize,
 comb(:,1) = lat_sc(:);
 comb(:,2) = lon_sc(:);
 comb(:,3) = zoo_200(:) .* 1e-3; % From mg to g
@@ -154,4 +161,3 @@ writetable(obsmod,'skill_hist_COPEPOD_all_clim_200_chls.csv')
 %%
 cope_comb = comb;
 save('skill_hist_obs_copepod_data.mat','cope_comb')
-

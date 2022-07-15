@@ -14,14 +14,14 @@ sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_st
 %% Standardization
 % use quantiles to determine what value to change zeros?
 quantile(comb(:,3:9),[0.01 0.05])
-% limit of observing capabilities
+% limit of observing capabilities 1 mgC/m2
 
 %% log10
-Acomb = log10(comb(:,3:9)+1e-9);
-Dcomb = log10(dcomb(:,3:9)+1e-9);
-Jcomb = log10(jcomb(:,3:9)+1e-9);
-Mcomb = log10(mcomb(:,3:9)+1e-9);
-Scomb = log10(scomb(:,3:9)+1e-9);
+Acomb = log10(comb(:,3:9)+1e-4);
+Dcomb = log10(dcomb(:,3:9)+1e-4);
+Jcomb = log10(jcomb(:,3:9)+1e-4);
+Mcomb = log10(mcomb(:,3:9)+1e-4);
+Scomb = log10(scomb(:,3:9)+1e-4);
 
 %% Skill metric = weighted sum of squares for multivariate
 metrics={'std','r','RMSD','CRMSD','bias','stdnorm','rmsdnorm','crmsdnorm',...
@@ -53,27 +53,27 @@ metrics=metrics';
 Amod_all = Acomb;
 o=(Amod_all(:,7));
 m=(Amod_all(:,1:6));
-A = skillstats(o, m);
+A = skillstats2(o, m);
 
 Dmod_all = Dcomb;
 o=(Dmod_all(:,7));
 m=(Dmod_all(:,1:6));
-D = skillstats(o, m);
+D = skillstats2(o, m);
 
 Mmod_all = Mcomb;
 o=(Mmod_all(:,7));
 m=(Mmod_all(:,1:6));
-M = skillstats(o, m);
+M = skillstats2(o, m);
 
 Jmod_all = Jcomb;
 o=(Jmod_all(:,7));
 m=(Jmod_all(:,1:6));
-J = skillstats(o, m);
+J = skillstats2(o, m);
 
 Smod_all = Scomb;
 o=(Smod_all(:,7));
 m=(Smod_all(:,1:6));
-S = skillstats(o, m);
+S = skillstats2(o, m);
 
 %%
 skill=NaN*ones(11,7,5);
@@ -151,7 +151,7 @@ simtext = {'obsGLMM','CAN','CMCC','CNRM','GFDL','IPSL','UK'};
 simtex = {'CA','CM','CN','GF','IP','UK'};
 ctext = {'All','Winter','Spring','Summer','Fall'};
 
-save([sfile 'skill_scores_hist_model_obsglm100_clim_log10_KK.mat'],'skill',...
+save([sfile 'skill_scores_hist_model_obsglm100_clim_log10_KK_1e4.mat'],'skill',...
     'simtext','metrics','ctext')
 
 %% Tables
@@ -173,12 +173,12 @@ Tmae = array2table(tmae,'RowNames',simtext,'VariableNames',ctext);
 bias = squeeze(skill(5,:,:));
 Tbias = array2table(bias,'RowNames',simtext,'VariableNames',ctext);
 
-writetable(Tcorr,[sfile 'corr_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Trmse,[sfile 'rmse_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Tnstd,[sfile 'nstd_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Turmse,[sfile 'urmse_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Tmae,[sfile 'mae_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
-writetable(Tbias,[sfile 'bias_hist_clims_200_obsglm100_log10_KK.csv'],'WriteRowNames',true);
+writetable(Tcorr,[sfile 'corr_hist_clims_200_obsglm100_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Trmse,[sfile 'rmse_hist_clims_200_obsglm100_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Tnstd,[sfile 'nstd_hist_clims_200_obsglm100_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Turmse,[sfile 'urmse_hist_clims_200_obsglm100_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Tmae,[sfile 'mae_hist_clims_200_obsglm100_log10_KK_1e4.csv'],'WriteRowNames',true);
+writetable(Tbias,[sfile 'bias_hist_clims_200_obsglm100_log10_KK_1e4.csv'],'WriteRowNames',true);
 
 %% make data vecs into tables to also calc stats in R
 
@@ -188,9 +188,9 @@ TJcomb = array2table(Jcomb,'VariableNames',simtext);
 TMcomb = array2table(Mcomb,'VariableNames',simtext);
 TScomb = array2table(Scomb,'VariableNames',simtext);
 
-writetable(TAcomb,[sfile 'climatol_All_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TDcomb,[sfile 'climatol_DJF_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TJcomb,[sfile 'climatol_JJA_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TMcomb,[sfile 'climatol_MAM_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
-writetable(TScomb,[sfile 'climatol_SON_hist_clims_200_obsglm100_log10.csv'],'WriteRowNames',false);
+writetable(TAcomb,[sfile 'climatol_All_hist_clims_200_obsglm100_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TDcomb,[sfile 'climatol_DJF_hist_clims_200_obsglm100_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TJcomb,[sfile 'climatol_JJA_hist_clims_200_obsglm100_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TMcomb,[sfile 'climatol_MAM_hist_clims_200_obsglm100_log10_1e4.csv'],'WriteRowNames',false);
+writetable(TScomb,[sfile 'climatol_SON_hist_clims_200_obsglm100_log10_1e4.csv'],'WriteRowNames',false);
 

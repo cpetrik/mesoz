@@ -1,4 +1,4 @@
-% CMIP6 output 
+% CMIP6 output
 % mesoz 200m integrations
 % Map ESM bias raw and scaled
 % log-10 trans
@@ -21,7 +21,7 @@ nzmo_all = nzmo_all * 12.01 * 1e3;
 gzmo_all = gzmo_all * 12.01 * 1e3;
 izmo_all = izmo_all * 12.01 * 1e3;
 uzmo_all = uzmo_all * 12.01 * 1e3;
-%obsglm mg C/m2 
+%obsglm mg C/m2
 
 %%
 clatlim=[-90 90];
@@ -39,13 +39,13 @@ load coastlines;
 [~,~,oz_s] = cyclic_map_seam(lat_g,lon_g,ozmo_all);
 
 %% log10-trans
-cz_r = log10(cz_s+1);
-mz_r = log10(mz_s+1);
-nz_r = log10(nz_s+1);
-gz_r = log10(gz_s+1);
-iz_r = log10(iz_s+1);
-uz_r = log10(uz_s+1);
-oz_r = log10(oz_s+1);
+cz_r = log10(cz_s+1e-4);
+mz_r = log10(mz_s+1e-4);
+nz_r = log10(nz_s+1e-4);
+gz_r = log10(gz_s+1e-4);
+iz_r = log10(iz_s+1e-4);
+uz_r = log10(uz_s+1e-4);
+oz_r = log10(oz_s+1e-4);
 
 %% Scale -1 to 1
 Cmax = nanmax(cz_r(:));
@@ -157,7 +157,7 @@ caxis([1 4])
 set(gcf,'renderer','painters')
 text(0.2,1.65,'IPSL','HorizontalAlignment','center','FontWeight','bold')
 
-%E - 
+%E -
 % subplot('Position',[0.5 0.75 0.44 0.25])
 
 %F - CMCC
@@ -246,7 +246,7 @@ caxis([-1 1])
 set(gcf,'renderer','painters')
 text(0.2,1.65,'IPSL','HorizontalAlignment','center','FontWeight','bold')
 
-%E - 
+%E -
 % subplot('Position',[0.5 0.75 0.44 0.25])
 
 %F - CMCC
@@ -320,7 +320,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,diff_gr)
 cmocean('balance')
 cb = colorbar('Position',[0.8 0.3 0.03 0.5],'orientation','vertical');
-xlabel(cb,'log_1_0(zmeso mgC m^-^2)')
+xlabel(cb,'zmeso bias (log_1_0 mgC m^-^2)')
 caxis([-2 2])
 text(0.2,1.65,'GFDL','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -380,7 +380,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,diff_gn)
 cmocean('balance')
 cb = colorbar('Position',[0.8 0.3 0.03 0.5],'orientation','vertical');
-xlabel(cb,'log_1_0(zmeso) scaled [-1 1]')
+xlabel(cb,'bias log_1_0(zmeso) scaled [-1 1]')
 caxis([-1 1])
 text(0.2,1.65,'GFDL','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -442,7 +442,7 @@ axesm ('Robinson','MapLatLimit',clatlim,'MapLonLimit',clonlim,'frame','on',...
 surfm(lat_s,lon_s,diff_gr)
 colormap(cmap)
 cb = colorbar('Position',[0.8 0.3 0.03 0.5],'orientation','vertical');
-xlabel(cb,'log_1_0(zmeso mgC m^-^2)')
+xlabel(cb,'bias zmeso (log_1_0 mgC m^-^2)')
 caxis([-1.5 1.5])
 text(0.2,1.65,'GFDL','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
@@ -466,4 +466,3 @@ text(0.2,1.65,'UK','HorizontalAlignment','center','FontWeight','bold')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 %stamp(stex)
 print('-dpng',[ppath 'Map_bias_all_hist_clim_glmm100_log10_bins.png'])
-
