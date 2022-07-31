@@ -25,13 +25,17 @@ cb=[34/255 136/255 51/255;...   %green
 
 set(groot,'defaultAxesColorOrder',cb);
 
+%% Update legend
+Model{9} = 'obsMO-M';
+Model{10} = 'obsMO-S';
+
 %% raw
 figure(1)
 bar(zmeans')
 legend(Model)
 legend('location','northwest')
 set(gca,'XTickLabels',region)
-ylabel('mean zmeso biomass (mgC m^-^2')
+ylabel('mean zmeso biomass (mgC m^-^2)')
 print('-dpng',[ppath 'Bar_Raw_hist_means_zmeso200_revis.png'])
 
 %% lg10
@@ -40,7 +44,16 @@ bar(log10(zmeans)')
 legend(Model)
 legend('location','eastoutside')
 set(gca,'XTickLabels',region)
-ylabel('mean zmeso biomass (log_1_0 mgC m^-^2')
+ylabel('mean zmeso biomass (log_1_0 mgC m^-^2)')
 print('-dpng',[ppath 'Bar_log10_hist_means_zmeso200_revis.png'])
+
+%% gC
+figure(3)
+bar(1e-3*zmeans')
+legend(Model)
+legend('location','northwest')
+set(gca,'XTickLabels',region)
+ylabel('mean zmeso biomass (gC m^-^2)')
+print('-dpng',[ppath 'Bar_Raw_hist_means_zmeso200_revis_gC.png'])
 
 

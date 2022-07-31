@@ -133,7 +133,7 @@ axis([0 180 0 3])
 text(-0.2,1.5,'Standard deviation','HorizontalAlignment','center')
 text(1.225,3.225,'Correlation coeff')
 text(0.8,3.15,{'Root mean','square error'},'color',[0.5 0.5 0.5])
-%text(2.275,3.5,'a','FontWeight','Bold','FontSize',14)
+text(2.275,4,'a','FontWeight','Bold','FontSize',14)
 
 
 %% Stromberg -----------------------------------------------
@@ -220,7 +220,7 @@ axis([0 180 0 4])
 text(-0.2,2.3,'Standard deviation','HorizontalAlignment','center')
 text(1.2,4.25,'Correlation coeff')
 text(0.8,4.25,{'Root mean','square error'},'color',[0.5 0.5 0.5])
-%text(2.275,3.5,'a','FontWeight','Bold','FontSize',14)
+text(2.275,5.1,'b','FontWeight','Bold','FontSize',14)
 
 t.Padding = 'compact';
 t.TileSpacing = 'compact';

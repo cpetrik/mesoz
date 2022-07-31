@@ -82,12 +82,24 @@ zoo_200 = zoo_g .* dep200;
 %% Convert all zoo units to mgC/m2
 %all models in molC: 12.01 g C in 1 mol C
 %1e3 mg in 1 g
-czmo_all = czmo_all * 12.01 * 1e3;
-mzmo_all = mzmo_all * 12.01 * 1e3;
-nzmo_all = nzmo_all * 12.01 * 1e3;
-gzmo_all = gzmo_all * 12.01 * 1e3;
-izmo_all = izmo_all * 12.01 * 1e3;
-uzmo_all = uzmo_all * 12.01 * 1e3;
+% czmo_all = czmo_all * 12.01 * 1e3;
+% mzmo_all = mzmo_all * 12.01 * 1e3;
+% nzmo_all = nzmo_all * 12.01 * 1e3;
+% gzmo_all = gzmo_all * 12.01 * 1e3;
+% izmo_all = izmo_all * 12.01 * 1e3;
+% uzmo_all = uzmo_all * 12.01 * 1e3;
+
+%% Convert all zoo units to gC/m2
+%all models in molC: 12.01 g C in 1 mol C
+czmo_all = czmo_all * 12.01 ;
+mzmo_all = mzmo_all * 12.01 ;
+nzmo_all = nzmo_all * 12.01 ;
+gzmo_all = gzmo_all * 12.01 ;
+izmo_all = izmo_all * 12.01 ;
+uzmo_all = uzmo_all * 12.01 ;
+%1e3 mg in 1 g
+szmo_all = szmo_all * 1e-3;
+zoo_200 = zoo_200 * 1e-3;
 
 %% Fix seam
 % lon_s = lon_g;
@@ -134,7 +146,7 @@ crameri('batlow')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 caxis([1.5 3.5])
 set(gcf,'renderer','painters')
-text(0.2,1.65,'COPEPOD','HorizontalAlignment','center','FontWeight','bold')
+text(0.2,1.65,'obsMO','HorizontalAlignment','center','FontWeight','bold')
 % cb = colorbar;%('Position',[0.8 0.3 0.03 0.5],'orientation','vertical');
 % xlabel(cb,'zmeso (log_1_0 mgC m^-^2)')
 
@@ -180,9 +192,9 @@ crameri('batlow')
 h=patchm(coastlat+0.5,coastlon+0.5,'w','FaceColor',[0.75 0.75 0.75]);
 caxis([1.5 3.5])
 set(gcf,'renderer','painters')
-text(0.2,1.65,'Stromberg','HorizontalAlignment','center','FontWeight','bold')
+text(0.2,1.65,'obsSM','HorizontalAlignment','center','FontWeight','bold')
 cb = colorbar('Position',[0.90 0.25 0.03 0.5],'orientation','vertical');
-xlabel(cb,'zmeso (log_1_0 mgC m^-^2)')
+xlabel(cb,'zmeso (log_1_0 gC m^-^2)')
 
 %F - CMCC
 subplot('Position',[0.455 0.5 0.44 0.25])
@@ -218,4 +230,4 @@ caxis([1.5 3.5])
 set(gcf,'renderer','painters')
 text(0.2,1.65,'UK','HorizontalAlignment','center','FontWeight','bold')
 
-print('-dpng',[ppath 'Map_all_hist_clim_copepod_stromberg_log10mgCm-2_int200m_ms_batlow.png'])
+print('-dpng',[ppath 'Map_all_hist_clim_copepod_stromberg_log10gCm-2_int200m_ms_batlow.png'])
