@@ -7,8 +7,10 @@ close all
 
 ppath = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/zmeso_figs/';
 apath='/Volumes/MIP/Fish-MIP/CMIP6/';
+%apath='/Volumes/petrik-lab/Feisty/Fish-MIP/CMIP6/';
 
 load([apath 'ISIMIP3b_cellarea_onedeg.mat'])
+
 
 %% load fixed ESMs
 load('Hist_mesoz_clim_biomes_samegrid.mat')
@@ -37,6 +39,7 @@ clear glmz_mo
 % 
 % Biomes
 bpath='/Volumes/MIP/Fish-MIP/CMIP6/biome_masks/';
+%bpath='/Volumes/petrik-lab/Feisty/Fish-MIP/CMIP6/biome_masks/';
 
 load([bpath 'SeaWiFS_based_biomes_x1.mat']);
 [lat_b,lon_b] = meshgrid(lat,lon);
@@ -275,13 +278,252 @@ zmeans(10,4) = nansum(CSzps(:)) ./ nansum(CSaps(:));
 simtext = {'CAN','CMCC','CNRM','GFDL','IPSL','UK','obsGLMM','obsSM','obsCM','obsCS'};
 sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
 
-Tmeanz = array2table(zmeans,'RowNames',simtext,'VariableNames',...
+Tstdz = array2table(zmeans,'RowNames',simtext,'VariableNames',...
     {'Global','LC','HCSS','HCPS'});
 
 %%
-writetable(Tmeanz,[sfile 'means_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.csv'],'WriteRowNames',true);
+writetable(Tstdz,[sfile 'means_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.csv'],'WriteRowNames',true);
 save('means_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.mat',...
     'Tmeanz','zmeans');
+
+%% area-weighted std dev
+% num = sum (area .* (obs - weightedmean).^2)
+% den = ((n-1)*sum(area))/n
+% wsd = sqrt( num / den )
+
+% area-weighted means
+czwm = zmeans(1,1) ;
+mzwm = zmeans(2,1) ;
+nzwm = zmeans(3,1) ;
+gzwm = zmeans(4,1) ;
+izwm = zmeans(5,1) ;
+uzwm = zmeans(6,1) ;
+ozwm = zmeans(7,1) ;
+szwm = zmeans(8,1) ;
+cmzwm = zmeans(9,1) ;
+cszwm = zmeans(10,1);
+
+% Numerator
+czg = nansum(areav(:) .* ((cz(:) - czwm).^2));
+mzg = nansum(areav(:) .* ((mz(:) - mzwm).^2));
+nzg = nansum(areav(:) .* ((nz(:) - nzwm).^2));
+gzg = nansum(areav(:) .* ((gz(:) - gzwm).^2));
+izg = nansum(areav(:) .* ((iz(:) - izwm).^2));
+uzg = nansum(areav(:) .* ((uz(:) - uzwm).^2));
+ozg = nansum(areav(:) .* ((oz(:) - ozwm).^2));
+szg = nansum(areav(:) .* ((sz(:) - szwm).^2));
+cmzg = nansum(areav2(:) .* ((z2(:) - cmzwm).^2));
+cszg = nansum(areav2(:) .* ((z2(:) - cszwm).^2));
+
+%Szlc = (sz(sid,:) .* areav(sid,:));
+%CMzlc = (z2(oid,:) .* areav2(oid,:));
+Czlc = nansum(areav(cid,:) .* ((cz(cid,:) - czwm).^2));
+Mzlc = nansum(areav(mid,:) .* ((mz(mid,:) - mzwm).^2));
+Nzlc = nansum(areav(nid,:) .* ((nz(nid,:) - nzwm).^2));
+Gzlc = nansum(areav(gid,:) .* ((gz(gid,:) - gzwm).^2));
+Izlc = nansum(areav(iid,:) .* ((iz(iid,:) - izwm).^2));
+Uzlc = nansum(areav(uid,:) .* ((uz(uid,:) - uzwm).^2));
+Ozlc = nansum(areav(oid,:) .* ((oz(oid,:) - ozwm).^2));
+Szlc = nansum(areav(sid,:) .* ((sz(sid,:) - szwm).^2));
+CMzlc = nansum(areav2(oid,:) .* ((z2(oid,:) - cmzwm).^2));
+CSzlc = nansum(areav2(sid,:) .* ((z2(sid,:) - cszwm).^2));
+
+Czss = nansum(areav(css,:) .* ((cz(css,:) - czwm).^2));
+Mzss = nansum(areav(mss,:) .* ((mz(mss,:) - mzwm).^2));
+Nzss = nansum(areav(nss,:) .* ((nz(nss,:) - nzwm).^2));
+Gzss = nansum(areav(gss,:) .* ((gz(gss,:) - gzwm).^2));
+Izss = nansum(areav(iss,:) .* ((iz(iss,:) - izwm).^2));
+Uzss = nansum(areav(uss,:) .* ((uz(uss,:) - uzwm).^2));
+Ozss = nansum(areav(oss,:) .* ((oz(oss,:) - ozwm).^2));
+Szss = nansum(areav(sss,:) .* ((sz(sss,:) - szwm).^2));
+CMzss = nansum(areav2(oss,:) .* ((z2(oss,:) - cmzwm).^2));
+CSzss = nansum(areav2(sss,:) .* ((z2(sss,:) - cszwm).^2));
+
+Czps = nansum(areav(cps,:) .* ((cz(cps,:) - czwm).^2));
+Mzps = nansum(areav(mps,:) .* ((mz(mps,:) - mzwm).^2));
+Nzps = nansum(areav(nps,:) .* ((nz(nps,:) - nzwm).^2));
+Gzps = nansum(areav(gps,:) .* ((gz(gps,:) - gzwm).^2));
+Izps = nansum(areav(ips,:) .* ((iz(ips,:) - izwm).^2));
+Uzps = nansum(areav(ups,:) .* ((uz(ups,:) - uzwm).^2));
+Ozps = nansum(areav(ops,:) .* ((oz(ops,:) - ozwm).^2));
+Szps = nansum(areav(sps,:) .* ((sz(sps,:) - szwm).^2));
+CMzps = nansum(areav2(ops,:) .* ((z2(ops,:) - cmzwm).^2));
+CSzps = nansum(areav2(sps,:) .* ((z2(sps,:) - cszwm).^2));
+
+%% num obs (n)
+nclc = 12 * length(cid);
+ncss = 12 * sum((css(:)));
+ncps = 12 * sum((cps(:)));
+nnlc = 12 * length(nid);
+nnss = 12 * sum((nss(:)));
+nnps = 12 * sum((nps(:)));
+nmlc = 12 * length(mid);
+nmss = 12 * sum((mss(:)));
+nmps = 12 * sum((mps(:)));
+nglc = 12 * length(gid);
+ngss = 12 * sum((gss(:)));
+ngps = 12 * sum((gps(:)));
+nilc = 12 * length(iid);
+niss = 12 * sum((iss(:)));
+nips = 12 * sum((ips(:)));
+nulc = 12 * length(uid);
+nuss = 12 * sum((uss(:)));
+nups = 12 * sum((ups(:)));
+nolc = 12 * length(oid);
+noss = 12 * sum((oss(:)));
+nops = 12 * sum((ops(:)));
+nslc = 12 * length(sid);
+nsss = 12 * sum((sss(:)));
+nsps = 12 * sum((sps(:)));
+ncmlc = 12 * length(oid);
+ncmss = 12 * sum((oss(:)));
+ncmps = 12 * sum((ops(:)));
+ncslc = 12 * length(sid);
+ncsss = 12 * sum((sss(:)));
+ncsps = 12 * sum((sps(:)));
+
+ncz = sum(~isnan(cz(:)));
+nnz = sum(~isnan(nz(:)));
+nmz = sum(~isnan(mz(:)));
+ngz = sum(~isnan(gz(:)));
+niz = sum(~isnan(iz(:)));
+nuz = sum(~isnan(uz(:)));
+noz = sum(~isnan(oz(:)));
+nsz = sum(~isnan(sz(:)));
+ncmz = sum(~isnan(z2(:)));
+ncsz = sum(~isnan(z2(:)));
+
+%% denom = (n-1)*sum(area)/n
+cgarea   = sum(areav(:),'omitnan') * (ncz-1) / ncz;
+ngarea   = sum(areav(:),'omitnan') * (nnz-1) / nnz;
+mgarea   = sum(areav(:),'omitnan') * (nmz-1) / nmz;
+ggarea   = sum(areav(:),'omitnan') * (ngz-1) / ngz;
+igarea   = sum(areav(:),'omitnan') * (niz-1) / niz;
+ugarea   = sum(areav(:),'omitnan') * (nuz-1) / nuz;
+ogarea   = sum(areav(:),'omitnan') * (noz-1) / noz;
+sgarea   = sum(areav(:),'omitnan') * (nsz-1) / nsz;
+cmgarea = sum(areav2(:),'omitnan') * (ncmz-1) / ncmz;
+csgarea = sum(areav2(:),'omitnan') * (ncsz-1) / ncsz;
+
+Calc  = sum(areav(cid,:),'omitnan') * (nclc-1) / nclc;
+Malc  = sum(areav(mid,:),'omitnan') * (nmlc-1) / nmlc;
+Nalc  = sum(areav(nid,:),'omitnan') * (nnlc-1) / nnlc;
+Galc  = sum(areav(gid,:),'omitnan') * (nglc-1) / nglc;
+Ialc  = sum(areav(iid,:),'omitnan') * (nilc-1) / nilc;
+Ualc  = sum(areav(uid,:),'omitnan') * (nulc-1) / nulc;
+Oalc  = sum(areav(oid,:),'omitnan') * (nolc-1) / nolc;
+Salc  = sum(areav(sid,:),'omitnan') * (nslc-1) / nslc;
+CMalc = sum(areav2(oid,:),'omitnan') * (ncmlc-1) / ncmlc;
+CSalc = sum(areav2(sid,:),'omitnan') * (ncslc-1) / ncslc;
+
+Cass  = sum(areav(css,:),'omitnan') * (ncss-1) / ncss;
+Mass  = sum(areav(mss,:),'omitnan') * (nmss-1) / nmss;
+Nass  = sum(areav(nss,:),'omitnan') * (nnss-1) / nnss;
+Gass  = sum(areav(gss,:),'omitnan') * (ngss-1) / ngss;
+Iass  = sum(areav(iss,:),'omitnan') * (niss-1) / niss;
+Uass  = sum(areav(uss,:),'omitnan') * (nuss-1) / nuss;
+Oass  = sum(areav(oss,:),'omitnan') * (noss-1) / noss;
+Sass  = sum(areav(sss,:),'omitnan') * (nsss-1) / nsss;
+CMass = sum(areav2(oss,:),'omitnan') * (ncmss-1) / ncmss;
+CSass = sum(areav2(sss,:),'omitnan') * (ncsss-1) / ncsss;
+
+Caps  = sum(areav(cps,:),'omitnan') * (ncps-1) / ncps;
+Maps  = sum(areav(mps,:),'omitnan') * (nmps-1) / nmps;
+Naps  = sum(areav(nps,:),'omitnan') * (nnps-1) / nnps;
+Gaps  = sum(areav(gps,:),'omitnan') * (ngps-1) / ngps;
+Iaps  = sum(areav(ips,:),'omitnan') * (nips-1) / nips;
+Uaps  = sum(areav(ups,:),'omitnan') * (nups-1) / nups;
+Oaps  = sum(areav(ops,:),'omitnan') * (nops-1) / nops;
+Saps  = sum(areav(sps,:),'omitnan') * (nsps-1) / nsps;
+CMaps = sum(areav2(ops,:),'omitnan') * (ncmps-1) / ncmps;
+CSaps = sum(areav2(sps,:),'omitnan') * (ncsps-1) / ncsps;
+
+
+%% Take s.d. by biome
+%global
+zstdev(1,1) = sqrt(czg ./ cgarea);
+zstdev(2,1) = sqrt(mzg ./ mgarea);
+zstdev(3,1) = sqrt(nzg ./ ngarea);
+zstdev(4,1) = sqrt(gzg ./ ggarea);
+zstdev(5,1) = sqrt(izg ./ igarea);
+zstdev(6,1) = sqrt(uzg ./ ugarea);
+zstdev(7,1) = sqrt(ozg ./ ogarea);
+zstdev(8,1) = sqrt(szg ./ sgarea);
+zstdev(9,1) = sqrt(cmzg ./ cmgarea);
+zstdev(10,1) = sqrt(cszg ./ csgarea);
+
+% LC
+zstdev(1,2) = sqrt(nansum(Czlc(:)) ./ nansum(Calc(:)));
+zstdev(2,2) = sqrt(nansum(Mzlc(:)) ./ nansum(Malc(:)));
+zstdev(3,2) = sqrt(nansum(Nzlc(:)) ./ nansum(Nalc(:)));
+zstdev(4,2) = sqrt(nansum(Gzlc(:)) ./ nansum(Galc(:)));
+zstdev(5,2) = sqrt(nansum(Izlc(:)) ./ nansum(Ialc(:)));
+zstdev(6,2) = sqrt(nansum(Uzlc(:)) ./ nansum(Ualc(:)));
+zstdev(7,2) = sqrt(nansum(Ozlc(:)) ./ nansum(Oalc(:)));
+zstdev(8,2) = sqrt(nansum(Szlc(:)) ./ nansum(Salc(:)));
+zstdev(9,2) = sqrt(nansum(CMzlc(:)) ./ nansum(CMalc(:)));
+zstdev(10,2) = sqrt(nansum(CSzlc(:)) ./ nansum(CSalc(:)));
+% SS
+zstdev(1,3) = sqrt(nansum(Czss(:)) ./ nansum(Cass(:)));
+zstdev(2,3) = sqrt(nansum(Mzss(:)) ./ nansum(Mass(:)));
+zstdev(3,3) = sqrt(nansum(Nzss(:)) ./ nansum(Nass(:)));
+zstdev(4,3) = sqrt(nansum(Gzss(:)) ./ nansum(Gass(:)));
+zstdev(5,3) = sqrt(nansum(Izss(:)) ./ nansum(Iass(:)));
+zstdev(6,3) = sqrt(nansum(Uzss(:)) ./ nansum(Uass(:)));
+zstdev(7,3) = sqrt(nansum(Ozss(:)) ./ nansum(Oass(:)));
+zstdev(8,3) = sqrt(nansum(Szss(:)) ./ nansum(Sass(:)));
+zstdev(9,3) = sqrt(nansum(CMzss(:)) ./ nansum(CMass(:)));
+zstdev(10,3) = sqrt(nansum(CSzss(:)) ./ nansum(CSass(:)));
+% PS
+zstdev(1,4) = sqrt(nansum(Czps(:)) ./ nansum(Caps(:)));
+zstdev(2,4) = sqrt(nansum(Mzps(:)) ./ nansum(Maps(:)));
+zstdev(3,4) = sqrt(nansum(Nzps(:)) ./ nansum(Naps(:)));
+zstdev(4,4) = sqrt(nansum(Gzps(:)) ./ nansum(Gaps(:)));
+zstdev(5,4) = sqrt(nansum(Izps(:)) ./ nansum(Iaps(:)));
+zstdev(6,4) = sqrt(nansum(Uzps(:)) ./ nansum(Uaps(:)));
+zstdev(7,4) = sqrt(nansum(Ozps(:)) ./ nansum(Oaps(:)));
+zstdev(8,4) = sqrt(nansum(Szps(:)) ./ nansum(Saps(:)));
+zstdev(9,4) = sqrt(nansum(CMzps(:)) ./ nansum(CMaps(:)));
+zstdev(10,4) = sqrt(nansum(CSzps(:)) ./ nansum(CSaps(:)));
+
+%%
+Tstdz = array2table(zstdev,'RowNames',simtext,'VariableNames',...
+    {'Global','LC','HCSS','HCPS'});
+
+%%
+writetable(Tstdz,[sfile 'stds_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.csv'],'WriteRowNames',true);
+save('stds_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.mat',...
+    'Tstdz','zstdev');
+
+%% rought test
+mean(gz(:),'omitnan')
+nanmean(nanmean(gz(gid,:)))
+nanmean(nanmean(gz(gss,:)))
+nanmean(nanmean(gz(gps,:)))
+
+gtestLC = gz(gid,:);
+gtestSS = gz(gss,:);
+gtestPS = gz(gps,:);
+std(gz(:),'omitnan')
+std(gtestLC(:),'omitnan')
+std(gtestSS(:),'omitnan')
+std(gtestPS(:),'omitnan')
+
+%% Put means and stddevs in one table
+tboth(:,1) = zmeans(:,1);
+tboth(:,2) = zstdev(:,1);
+tboth(:,3) = zmeans(:,2);
+tboth(:,4) = zstdev(:,2);
+tboth(:,5) = zmeans(:,3);
+tboth(:,6) = zstdev(:,3);
+tboth(:,7) = zmeans(:,4);
+tboth(:,8) = zstdev(:,4);
+
+Tboth = array2table(tboth,'RowNames',simtext,'VariableNames',...
+    {'mGlobal','sGlobal','mLC','sLC','mHCSS','sHCSS','mHCPS','sHCPS'});
+writetable(Tboth,[sfile 'means_stds_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.csv'],'WriteRowNames',true);
+save('means_stds_areaw_hist_aclim_zmeso200_obsglm100_strom_cope_global_biomes.mat',...
+    'Tboth','tboth');
 
 %% test COPE not area-weighted
 %area-weighting lowering the means b/c not all grid cells with area have

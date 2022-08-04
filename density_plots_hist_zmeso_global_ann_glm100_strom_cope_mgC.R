@@ -100,7 +100,7 @@ uS <- ggplot(Zm, aes(y=UK, x=Stromberg)) + theme_bw(base_size=12) +
 cC <- ggplot(Zm, aes(y=CAN, x=Copepod)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
-  ylab("") + xlab("") + ggtitle("COPEPOD") +
+  ylab("") + xlab("") + ggtitle("obsMO") +
   scale_y_log10() + scale_x_log10() + theme(legend.position='none')
 mC <- ggplot(Zm, aes(y=CMCC, x=Copepod)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 

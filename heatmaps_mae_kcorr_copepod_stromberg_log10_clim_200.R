@@ -101,7 +101,7 @@ frs <- ggplot(data = sval3, aes(y=Model, x=Season, fill=Corr)) +
 
 frb <- ggplot(data = fbia3, aes(y=Model, x=Season, fill=Bias)) + 
   geom_tile(color = "white")+
-  scale_fill_distiller(palette = "PRGn", name="Bias", limit = c(-0.35,0.35)) +
+  scale_fill_distiller(palette = "PRGn", name="Bias", limit = c(-0.49,0.49)) +
   theme_minimal()+ 
   theme(axis.text.x = element_text(angle = 45, vjust = 1, 
                                    size = 8, hjust = 1))+
@@ -111,7 +111,7 @@ frb <- ggplot(data = fbia3, aes(y=Model, x=Season, fill=Bias)) +
 fae <- ggplot(data = fmae3, aes(y=Model, x=Season, fill=MAE)) + 
   geom_tile(color = "white") +
   scale_fill_distiller(palette = "YlOrBr", trans = "reverse", name="MAE", 
-                       limit = c(0.6,0.33)) +
+                       limit = c(0.66,0.2)) +
   theme_minimal() + labs(x="")+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, 
                                    size = 8, hjust = 1))+
@@ -162,7 +162,7 @@ zmae3$Model <- factor(zmae3$Model,levels = c("UK","IPSL","GFDL","CNRM","CMCC","C
 
 zrms3$RMSE <- abs(zrms3$RMSE)
 
-### Heatmaps
+### Heatmaps - use same colorscale as obsGLMM for easy comp
 zrp <- ggplot(data = zrval3, aes(y=Model, x=Season, fill=Corr)) + 
   geom_tile(color = "white") +
   scale_fill_distiller(palette = "RdBu", limit = c(-0.6,0.6),  
@@ -195,7 +195,7 @@ zrs <- ggplot(data = zsval3, aes(y=Model, x=Season, fill=Corr)) +
 
 zrb <- ggplot(data = zbia3, aes(y=Model, x=Season, fill=Bias)) + 
   geom_tile(color = "white")+
-  scale_fill_distiller(palette = "PRGn", name="Bias", limit = c(-0.4,0.4)) +
+  scale_fill_distiller(palette = "PRGn", name="Bias", limit = c(-0.49,0.49)) +
   theme_minimal()+ 
   theme(axis.text.x = element_text(angle = 45, vjust = 1, 
                                    size = 8, hjust = 1))+
@@ -205,7 +205,7 @@ zrb <- ggplot(data = zbia3, aes(y=Model, x=Season, fill=Bias)) +
 zae <- ggplot(data = zmae3, aes(y=Model, x=Season, fill=MAE)) + 
   geom_tile(color = "white") +
   scale_fill_distiller(palette = "YlOrBr", trans = "reverse", name="MAE", 
-                       limit = c(0.51,0.23)) +
+                       limit = c(0.66,0.2)) +
   theme_minimal() + labs(x="")+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, 
                                    size = 8, hjust = 1))+
