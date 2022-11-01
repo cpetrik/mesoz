@@ -49,9 +49,13 @@ xpred = [xmin:0.05:xmax]';
 
 mdl0 = fitlm(Lchl(1:6),log_diff(:,1));
 ypred0 = predict(mdl0,xpred);
+r_mdl0 = mdl0.Rsquared.Ordinary;
+p_mdl0 = mdl0.Coefficients.pValue(2);
 
 noCmdl0 = fitlm(Lchl(2:6),log_diff(2:6,1));
 noCypred0 = predict(noCmdl0,xpred);
+r_noCmdl0 = noCmdl0.Rsquared.Ordinary;
+p_noCmdl0 = noCmdl0.Coefficients.pValue(2);
 
 sfile = '/Users/cpetrik/Dropbox/Princeton/Fish-MIP/CMIP6/driver_analysis/data_stats_zmeso/';
 
@@ -104,6 +108,8 @@ ylabel('\Delta (log_1_0 zmeso)')
 xlabel('Slope of historic relationship')
 %title('Future change')
 text(0.02,0.115,'b','FontWeight','Bold','FontSize',14)
+text(1.0,0.085,['r^2 = ' sprintf('%2.2f',r_mdl0)])
+text(1.0,0.065,['p = ' sprintf('%2.2f',p_mdl0)])
 
 % Percent change from 1965
 subplot('Position',[0.1 0.1 0.3 0.35])
@@ -128,6 +134,7 @@ xlim([-30 16])
 text(-29.5,0.084,'d','FontWeight','Bold','FontSize',14)
 
 print('-dpng',[figp 'Hist_lm_SSP585_delta_EC_global_log10_ms_mgC.png'])
+print('-djpeg',[figp 'Hist_lm_SSP585_delta_EC_global_log10_ms_mgC.jpeg'])
 
 %% No CAN + global
 figure(2)
@@ -160,6 +167,8 @@ ylabel('\Delta (log_1_0 zmeso)')
 xlabel('Slope of historic relationship')
 %title('Future change')
 text(0.25,0.007,'b','FontWeight','Bold','FontSize',14)
+text(0.9,-0.01,['r^2 = ' sprintf('%2.2f',r_noCmdl0)])
+%text(0.9,-0.02,['p = ' sprintf('%2.2f',p_noCmdl0)])
 
 % Percent change from 1965
 subplot('Position',[0.1 0.1 0.3 0.35])
@@ -184,3 +193,4 @@ xlim([-30 16])
 text(-29.5,0.084,'d','FontWeight','Bold','FontSize',14)
 
 print('-dpng',[figp 'Hist_lm_SSP585_delta_EC_global_cope_log10_ms_noCAN_mgC.png'])
+print('-djpeg',[figp 'Hist_lm_SSP585_delta_EC_global_cope_log10_ms_noCAN_mgC.jpeg'])

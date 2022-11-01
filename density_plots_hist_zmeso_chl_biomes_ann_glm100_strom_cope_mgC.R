@@ -207,12 +207,12 @@ g3 <- ggplot(subset(GM,biome==3), aes(y=zmeso, x=chl)) + theme_bw(base_size=12) 
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
   ylab("") + xlab("") + #ggtitle("HCPS") +
-  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+  scale_y_log10(limits = c(30, 3*1e3)) + scale_x_log10() + theme(legend.position='none')
 g0 <- ggplot(GM, aes(y=zmeso, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
   geom_smooth(method="lm", se=FALSE, col="red", size = 0.25) + 
-  ylab("") + xlab("") + #ggtitle("HCPS") +
-  scale_y_log10() + scale_x_log10() + theme(legend.position='none')
+  ylab("") + xlab("") + #ggtitle("Global") +
+  scale_y_log10(limits = c(30, 3*1e3)) + scale_x_log10() + theme(legend.position='none')
 
 i1 <- ggplot(subset(IM,biome==1), aes(y=zmeso, x=chl)) + theme_bw(base_size=12) +  
   geom_bin2d(bins = 100) + scale_fill_continuous(type = "viridis") + 
