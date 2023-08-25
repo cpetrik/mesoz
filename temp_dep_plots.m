@@ -41,18 +41,18 @@ uqzm = 1.0;
 uqdr = 1.895;
 
 %% Plot ratio of rates as fn of diff in temp
-temp1 = 0:0.25:10;
-temp2 = 0.05:0.25:10;
-temp3 = 0.1:0.25:10;
-temp4 = 0.15:0.25:10;
-temp5 = 0.2:0.25:10;
+temp1 = 0:0.75:10;
+temp2 = -0.2:0.75:10;
+temp3 = -0.4:0.75:10;
+temp4 = -0.6:0.75:10;
+temp5 = -0.8:0.75:10;
 
 % phyto growth
-cpg = cqpg .^ (temp1./10);
+cpg = cqpg .^ (temp5./10);
 mpg = mqpg .^ (temp2./10);
 ppg = pqpg .^ (temp3./10);
 gpg = gqpg .^ (temp4./10);
-upg = uqpg .^ (temp5./10);
+upg = uqpg .^ (temp1./10);
 
 % zoo grazing
 czg = cqzg .^ (temp2./10);
@@ -108,14 +108,15 @@ plot(temp4,pzg,'--*','MarkerSize',5); hold on;
 plot(temp5,gzg,'--*','MarkerSize',5); hold on;
 plot(temp1,uzg,'--*','MarkerSize',5); hold on;
 
-plot(temp1,cpg,'--.','MarkerSize',12); hold on;
+plot(temp5,cpg,'--.','MarkerSize',12); hold on;
 plot(temp2,mpg,'--.','MarkerSize',12); hold on;
 plot(temp3,ppg,'--.','MarkerSize',12); hold on;
 plot(temp4,gpg,'--.','MarkerSize',12); hold on;
-plot(temp5,upg,'--.','MarkerSize',12); hold on;
-legend({'zCanOE','zBFM','zPISCES','zCOBALT','zMEDUSA',...
-    'pCanOE','pBFM','pPISCES','pCOBALT','pMEDUSA'},'Location','northwest','NumColumns',2);
+plot(temp1,upg,'--.','MarkerSize',12); hold on;
+legend({'zCAN','zCMCC','zCNRM/IPSL','zGFDL','zUK',...
+    'pCAN','pCMCC','pCNRM/IPSL','pGFDL','pUK'},'Location','northwest','NumColumns',2);
 ylim([0.8 2.2])
+xlim([0 10])
 xlabel('Difference in temperature')
 ylabel('Ratio of rates')
 title('Growth or Grazing')
@@ -126,7 +127,7 @@ plot(temp1,mdr,'--v','MarkerSize',5); hold on;
 plot(temp2,pdr,'--v','MarkerSize',5); hold on;
 plot(temp3,gdr,'--v','MarkerSize',5); hold on;
 plot(temp4,udr,'--v','MarkerSize',5); hold on;
-lgd = legend({'dCanOE','dBFM','dPISCES','dCOBALT','dMEDUSA'},...
+lgd = legend({'dCAN','dCMCC','dCNRM/IPSL','dGFDL','dUK'},...
     'location','northwest');
 lgd.AutoUpdate = 'off';
 
@@ -142,9 +143,61 @@ plot(temp5,ppm,'--.','MarkerSize',12); hold on;
 plot(temp1,gpm,'--.','MarkerSize',12); hold on;
 plot(temp2,upm,'--.','MarkerSize',12); hold on;
 ylim([0.8 2.2])
+xlim([0 10])
 xlabel('Difference in temperature')
 ylabel('Ratio of rates')
 title('Mortality or Remineralization')
 print('-dpng',[ppath 'temp_dep_q10_bgc.png'])
+
+%%
+%figure(1)
+figure('Units','inches','Position',[1 2 13 6]);
+subplot(1,2,1)
+plot(temp2,czg,'--*','MarkerSize',5); hold on;
+plot(temp3,mzg,'--*','MarkerSize',5); hold on;
+plot(temp4,pzg,'--*','MarkerSize',5); hold on;
+plot(temp5,gzg,'--*','MarkerSize',5); hold on;
+plot(temp1,uzg,'--*','MarkerSize',5); hold on;
+
+plot(temp5,cpg,'--.','MarkerSize',12); hold on;
+plot(temp2,mpg,'--.','MarkerSize',12); hold on;
+plot(temp3,ppg,'--.','MarkerSize',12); hold on;
+plot(temp4,gpg,'--.','MarkerSize',12); hold on;
+plot(temp1,upg,'--.','MarkerSize',12); hold on;
+legend({'zCAN','zCMCC','zCNRM/IPSL','zGFDL','zUK',...
+    'pCAN','pCMCC','pCNRM/IPSL','pGFDL','pUK'},'Location','northwest','NumColumns',2);
+ylim([0.8 2.2])
+xlim([0 10])
+xlabel('Difference in temperature')
+ylabel('Ratio of rates')
+title('Growth or Grazing')
+
+subplot(1,2,2)
+plot(temp5,cdr,'--v','MarkerSize',5); hold on;
+plot(temp1,mdr,'--v','MarkerSize',5); hold on;
+plot(temp2,pdr,'--v','MarkerSize',5); hold on;
+plot(temp3,gdr,'--v','MarkerSize',5); hold on;
+plot(temp4,udr,'--v','MarkerSize',5); hold on;
+lgd = legend({'dCAN','dCMCC','dCNRM/IPSL','dGFDL','dUK'},...
+    'location','northwest');
+lgd.AutoUpdate = 'off';
+
+plot(temp4,czm,'--*','MarkerSize',5); hold on;
+plot(temp5,mzm,'--*','MarkerSize',5); hold on;
+plot(temp1,pzm,'--*','MarkerSize',5); hold on;
+plot(temp2,gzm,'--*','MarkerSize',5); hold on;
+plot(temp3,uzm,'--*','MarkerSize',5); hold on;
+
+plot(temp3,cpm,'--.','MarkerSize',12); hold on;
+plot(temp4,mpm,'--.','MarkerSize',12); hold on;
+plot(temp5,ppm,'--.','MarkerSize',12); hold on;
+plot(temp1,gpm,'--.','MarkerSize',12); hold on;
+plot(temp2,upm,'--.','MarkerSize',12); hold on;
+ylim([0.8 2.2])
+xlim([0 10])
+xlabel('Difference in temperature')
+ylabel('Ratio of rates')
+title('Mortality or Remineralization')
+print('-dpng',[ppath 'temp_dep_q10_bgc_v2.png'])
 
 
